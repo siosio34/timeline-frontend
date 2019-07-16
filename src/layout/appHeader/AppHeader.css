@@ -1,0 +1,44 @@
+header.ant-layout-header {
+  background: white;
+  margin-bottom: 20px;
+}
+
+.app-header {
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+}
+
+.header-title {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-nav {
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+}
+
+.header-nav-item {
+  color: black;
+  margin-right: 15px;
+}
+
+.header-nav-item:hover {
+  color: #03cf5d;
+}
+
+.header-login-button {
+  float: right;
+  top: 16px;
+  right: -15px;
+}
+
+.ant-avatar.user-icon {
+  margin-left: 15px;
+}
+
+.user-icon:hover {
+  cursor: pointer;
+}

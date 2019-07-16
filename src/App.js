@@ -6,6 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import SignUpPage from 'pages/signup';
 import configureStore from 'store/configureStore';
+import { AppHeader, AppContent } from 'layout';
 
 import './App.css';
 import 'antd/dist/antd.css';
@@ -17,7 +18,10 @@ function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <SignUpPage />
+        <AppHeader />
+        <AppContent className="app-content">
+          <SignUpPage />
+        </AppContent>
       </ConnectedRouter>
     </Provider>
   );
