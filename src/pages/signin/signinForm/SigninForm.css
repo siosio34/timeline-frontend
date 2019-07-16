@@ -1,0 +1,32 @@
+.signin-form {
+  max-width: 300px;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.signin-form a {
+  color: #03cf5d;
+}
+
+.signin-form .ant-form-item {
+  margin-bottom: 10px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.register-link {
+  margin-top: 10px;
+  text-align: right;
+  font-size: 13px;
+}
+
+.register-link a {
+  font-weight: 700;
+}

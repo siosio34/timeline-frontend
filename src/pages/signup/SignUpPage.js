@@ -7,7 +7,7 @@ class SignUpPage extends React.Component {
 
   render() {
     return (
-      <div style={{ width: '500px', margin: 'auto' }}>
+      <div style={{ maxWidth: '500px', margin: 'auto' }}>
         <h1 style={{textAlign: 'center'}}>회원가입</h1>
         <SignupForm />
       </div>
