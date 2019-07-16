@@ -4,30 +4,57 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { connect } from 'react-redux';
-import { Button } from 'antd';
-import { Input, FormItem, Form } from '@jbuschke/formik-antd';
+import { Button, Row, Col } from 'antd';
+import { Input, FormItem, Form, Select } from '@jbuschke/formik-antd';
 
 import {
   AccountActionTypes,
   AccountActionCreators,
 } from 'store/account/account.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
+import './SignupForm.css';
+
+const { Option } = Select;
 
 const InitialValue = {
   email: '',
   password: '',
   username: '',
   city: '',
-  state: '',
+  school: '',
+  birthday: '',
 };
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().required('해당 항목을 입력해 주세요'),
-  password: Yup.string().required('해당 항목을 입력해 주세요'),
-  username: Yup.string().required('해당 항목을 입력해 주세요'),
-  city: Yup.string().required('해당 항목을 입력해 주세요'),
-  state: Yup.string().required('해당 항목을 입력해 주세요'),
+  email: Yup.string().required('해당 항목을 입력해 주세요.'),
+  password: Yup.string()
+    .min(10, '최소 10자 이상 입력해주세요.')
+    .required('해당 항목을 입력해 주세요.'),
+  username: Yup.string().required('해당 항목을 입력해 주세요.'),
+  city: Yup.string().required('해당 항목을 선택해 주세요.'),
+  school: Yup.string().required('해당 항목을 입력해 주세요.'),
+  birthday: Yup.string()
+    .min(6, '생년월일 6자를 입력해주세요.')
+    .max(6, '생년월일 6자를 입력해주세요.')
+    .required('해당 항목을 입력해 주세요.'),
 });
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 6 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 14 },
+  },
+};
+
+const cityList = [
+  '서울', '경기', '인천', '대전', '대구', '부산', '울산', '광주',
+  '강원', '세종', '충북', '충남', '전북', '전남', '경북', '경남',
+  '제주', '국외'
+];
 
 class SignUpForm extends React.Component {
   render() {
@@ -35,7 +62,7 @@ class SignUpForm extends React.Component {
     const { signup } = this.props;
 
     return (
-      <div>
+      <div className="signup-form">
         <Formik
           initialValues={InitialValue}
           validationSchema={SignupSchema}
@@ -43,30 +70,40 @@ class SignUpForm extends React.Component {
             signup(values);
           }}
           render={() => (
-            <Form>
-              <FormItem name="email">
+            <Form {...formItemLayout}>
+              <FormItem label="이메일" name="email">
                 <Input name="email" type="email" />
               </FormItem>
-              <FormItem name="password">
+              <FormItem label="패스워드" name="password">
                 <Input.Password name="password" />
               </FormItem>
-              <FormItem name="username">
+              <FormItem label="이름" name="username">
                 <Input name="username" />
               </FormItem>
-              <FormItem name="city">
-                <Input name="city" />
+              <FormItem label="거주지역" name="city">
+                <Select placeholder="선택하기" name="city">
+                  {cityList.map(city =>
+                    <Option key={`cityOption_${city}`} value={city}>{city}</Option>)}
+                </Select>
               </FormItem>
-              <FormItem name="state">
-                <Input name="state" />
+              <FormItem label="학교" name="school">
+                <Input name="school" />
               </FormItem>
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={loading}
-                disabled={loading}
-              >
-                회원가입하기
-              </Button>
+              <FormItem label="생년월일" name="birthday">
+                <Input name="birthday" placeholder="생년월일 6자를 입력해주세요." />
+              </FormItem>
+              <Row className="signup-submit">
+                <Col span={4} offset={16}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={loading}
+                    disabled={loading}
+                  >
+                    회원가입하기
+                  </Button>
+                </Col>
+              </Row>
             </Form>
           )}
         />

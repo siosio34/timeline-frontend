@@ -6,7 +6,12 @@ class SignUpPage extends React.Component {
   componentDidMount() {}
 
   render() {
-    return <SignupForm />;
+    return (
+      <div style={{ width: '500px', margin: 'auto' }}>
+        <h1 style={{textAlign: 'center'}}>회원가입</h1>
+        <SignupForm />
+      </div>
+    );
   }
 }
 
