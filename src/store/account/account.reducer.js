@@ -2,6 +2,7 @@ import { AccountActionTypes } from './account.action';
 
 export const initialState = {
   token: {},
+  isLogin: false,
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.response.token || {},
+        isLogin: true,
       };
 
     case AccountActionTypes.SIGNUP.SUCCESS:
