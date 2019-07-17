@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { Avatar, Layout } from 'antd';
 import './AppHeader.css';
 
 const { Header } = Layout;
 
 // eslint-disable-next-line react/prop-types
-function AppHeader({ isLogin = true }) {
+function AppHeader({ isLogin }) {
   return (
     <Header className="app-header">
       <h5 className="header-title">
@@ -26,7 +28,18 @@ function AppHeader({ isLogin = true }) {
 }
 
 AppHeader.propTypes = {
-  isLogin: PropTypes.bool,
+  isLogin: PropTypes.bool.isRequired,
 };
 
-export default AppHeader;
+const mapStateToProps = state => ({
+  isLogin: state.account.isLogin,
+});
+
+const mapDispatchToProps = () => ({
+
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AppHeader);
