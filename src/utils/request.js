@@ -41,7 +41,7 @@ function onRrefreshed(token) {
   refreshSubscribers.map(cb => cb(token));
 }
 
-Request.interceptors.response.use(
+RequestApi.interceptors.response.use(
   response => response.data,
   error => {
     const { config, response } = error;
