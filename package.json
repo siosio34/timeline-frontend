@@ -45,7 +45,10 @@
     "rules": {
       "react/prefer-stateless-function": 0,
       "react/jsx-filename-extension": 0,
-      "react/jsx-one-expression-per-line": 0
+      "react/jsx-one-expression-per-line": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "camelcase": 0
     },
     "env": {
       "browser": true
