@@ -12,9 +12,11 @@ const { Header } = Layout;
 function AppHeader({ isLogin }) {
   return (
     <Header className="app-header">
-      <h5 className="header-title">
-        Time<span className="color-emphasize">line</span>
-      </h5>
+      <Link to='/'>
+        <h5 className="header-title">
+          Time<span className="color-emphasize">line</span>
+        </h5>
+      </Link>
       {isLogin ? (
         <nav className="header-nav">
           <Link className="header-nav-item" to="/timeline">타임라인</Link>
