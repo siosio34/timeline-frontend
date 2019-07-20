@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import { AccountApi } from 'api';
 import { AccountActionTypes, AccountActionCreators } from './account.action';
@@ -7,19 +8,27 @@ export function* signin(action) {
   try {
     yield put(AccountActionCreators.signin.request());
     const response = yield call(AccountApi.signin, action.payload);
+    const { access_token, refresh_token } = response;
+    window.localStorage.setItem('access_token', access_token);
+    window.localStorage.setItem('refresh_token', refresh_token);
+    yield put(push('/'));
     yield put(AccountActionCreators.signin.success({ response }));
   } catch (error) {
     yield put(AccountActionCreators.signin.failure({ error }));
   }
 }
 
-export function* signup(action) {
+export function* register(action) {
   try {
-    yield put(AccountActionCreators.signup.request());
-    const response = yield call(AccountApi.signup, action.payload);
-    yield put(AccountActionCreators.signup.success({ response }));
+    yield put(AccountActionCreators.register.request());
+    const response = yield call(AccountApi.register, action.payload);
+    const { access_token, refresh_token } = response;
+    window.localStorage.setItem('access_token', access_token);
+    window.localStorage.setItem('refresh_token', refresh_token);
+    yield put(push('/'));
+    yield put(AccountActionCreators.register.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.signup.failure({ error }));
+    yield put(AccountActionCreators.register.failure({ error }));
   }
 }
 
@@ -34,8 +43,22 @@ export function* refreshToken() {
   }
 }
 
+export function* checkDuplicateEmail(action) {
+  try {
+    yield put(AccountActionCreators.checkDuplicateEmail.request());
+    const response = yield call(AccountApi.checkDuplicateEmail, action.payload);
+    yield put(AccountActionCreators.checkDuplicateEmail.success({ response }));
+  } catch (error) {
+    yield put(AccountActionCreators.checkDuplicateEmail.failure({ error }));
+  }
+}
+
 export const accountSagas = [
   takeLatest(AccountActionTypes.SIGNIN.INDEX, signin),
-  takeLatest(AccountActionTypes.SIGNUP.INDEX, signup),
+  takeLatest(AccountActionTypes.REGISTER.INDEX, register),
   takeLatest(AccountActionTypes.REFRESH_TOKEN.INDEX, refreshToken),
+  takeLatest(
+    AccountActionTypes.CHECK_DUPLICATE_EMAIL.INDEX,
+    checkDuplicateEmail,
+  ),
 ];

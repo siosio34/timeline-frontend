@@ -1,0 +1,11 @@
+.register-form .ant-form-item {
+  margin-bottom: 10px;
+}
+
+.register-submit {
+  margin-top: 40px;
+}
+
+.register-form .ant-form-explain {
+  font-size: 13px;
+}

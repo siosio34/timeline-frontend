@@ -48,7 +48,9 @@
       "react/jsx-one-expression-per-line": 0,
       "no-param-reassign": 0,
       "no-underscore-dangle": 0,
-      "camelcase": 0
+      "camelcase": 0,
+      "react/jsx-wrap-multilines": 0,
+      "react/forbid-prop-types": 0
     },
     "env": {
       "browser": true
