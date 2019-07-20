@@ -1,19 +1,24 @@
 import RequestApi from 'utils/request';
 
 const signin = signinAccountData => {
-  return RequestApi.post('/account/signin', { ...signinAccountData });
+  return RequestApi.post('/accounts/signin', { ...signinAccountData });
 };
 
-const signup = signupAccountData => {
-  return RequestApi.post('/account/signup', { ...signupAccountData });
+const register = registerAccountData => {
+  return RequestApi.post('/accounts/register', { ...registerAccountData });
 };
 
 const refreshToken = token => {
-  return RequestApi.get(`/account/refresh/${token}`);
+  return RequestApi.get(`/accounts/refresh/${token}`);
+};
+
+const checkDuplicateEmail = email => {
+  return RequestApi.get(`/accounts/duplicate/${email}`);
 };
 
 export default {
   signin,
-  signup,
+  register,
   refreshToken,
+  checkDuplicateEmail,
 };

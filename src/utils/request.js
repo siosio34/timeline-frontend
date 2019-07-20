@@ -14,13 +14,12 @@ RequestApi.interceptors.request.use(
     const parsedParams = parsingEmptyValueParams(config.params);
     config.params = parsedParams;
 
-    const tokenType = window.localStorage.getItem('token_type');
     const accessToken = window.localStorage.getItem('access_token');
 
-    const isLoginURL = config.url && config.url.includes('login');
+    const isLoginURL = config.url && config.url.includes('accounts');
 
     if (accessToken && isLoginURL === false) {
-      config.headers.Authorization = `${tokenType} ${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     return config;

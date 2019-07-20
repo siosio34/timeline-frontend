@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router';
 
 import history from 'utils/history';
-import SignUpPage from 'pages/signup';
+import RegisterPage from 'pages/register';
 import SignInPage from 'pages/signin';
 import configureStore from 'store/configureStore';
 import { AppHeader, AppContent } from 'layout';
@@ -23,7 +23,7 @@ function App() {
         <AppHeader />
         <AppContent className="app-content">
           <Switch>
-            <Route path="/join" component={SignUpPage} />
+            <Route path="/register" component={RegisterPage} />
             <Route path="/login" component={SignInPage} />
           </Switch>
         </AppContent>
