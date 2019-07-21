@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
 
 const RecommendFriendsButton = ({ friendInfo = {} }) => {
   const { requested } = friendInfo;
   return (
-    <Button
-      size="small"
-      type={requested ? 'RequestFriendsButton' : 'dashed'}
-    >
+    <Button size="small" type={requested ? 'RequestFriendsButton' : 'dashed'}>
       {requested ? '친구신청' : '요청 중'}
     </Button>
   );

@@ -2,18 +2,12 @@ import React from 'react';
 
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router';
 
 import history from 'utils/history';
-import IntroPage from 'pages/intro';
-import RegisterPage from 'pages/register';
-import Timeline from 'pages/timeline';
-import FriendsPage from 'pages/friends';
-import LoginPage from 'pages/login';
+
 import configureStore from 'store/configureStore';
 import { AppHeader, AppContent } from 'layout';
-
-import refreshTokenNotExpired from 'utils/refreshTokenNotExpired';
+import RouteComponent from './routes';
 
 import './App.css';
 import 'antd/dist/antd.css';
@@ -27,16 +21,7 @@ function App() {
       <ConnectedRouter history={history}>
         <AppHeader />
         <AppContent className="app-content">
-          <Switch>
-            <Route
-              path="/"
-              exact
-              component={refreshTokenNotExpired() ? Timeline : IntroPage}
-            />
-            <Route path="/register" component={RegisterPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/friends" component={FriendsPage} />
-          </Switch>
+          <RouteComponent />
         </AppContent>
       </ConnectedRouter>
     </Provider>

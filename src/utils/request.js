@@ -53,9 +53,11 @@ RequestApi.interceptors.response.use(
         return RequestApi.get(`/accounts/refresh/${refreshToken}`)
           .then(({ data }) => {
             const { access_token, refresh_token } = data;
+            window.localStorage.clear();
             window.localStorage.setItem('access_token', access_token);
             window.localStorage.setItem('refresh_token', refresh_token);
             isRefreshing = false;
+
             onRrefreshed(access_token);
           })
           .catch(refreshTokenRequestError => {
