@@ -8,6 +8,7 @@ import history from 'utils/history';
 import IntroPage from 'pages/intro';
 import RegisterPage from 'pages/register';
 import Timeline from 'pages/timeline';
+import FriendsPage from 'pages/friends';
 import LoginPage from 'pages/login';
 import configureStore from 'store/configureStore';
 import { AppHeader, AppContent } from 'layout';
@@ -34,6 +35,7 @@ function App() {
             />
             <Route path="/register" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/friends" component={FriendsPage} />
           </Switch>
         </AppContent>
       </ConnectedRouter>
