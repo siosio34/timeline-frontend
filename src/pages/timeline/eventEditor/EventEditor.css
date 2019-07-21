@@ -1,0 +1,13 @@
+.editor-image-uploader {
+  margin-top: 20px;
+}
+
+.ant-input.editor-textarea {
+  display: inline-block;
+  max-width: 80%;
+}
+
+.editor-button, .editor-button-area {
+  display: inline-block;
+  margin-left: 5px;
+}
