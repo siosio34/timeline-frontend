@@ -1,27 +1,15 @@
 import React from 'react';
-import { List, Avatar, Button } from 'antd/lib/index';
+import PropTypes from 'prop-types';
+import { List, Avatar } from 'antd/lib/index';
 import './FriendsList.css';
 
-const requestButton = () => (
-  <>
-    <Button size="small" style={{marginRight: '2px'}} type="primary" ghost>수락</Button>
-    <Button size="small" type="danger" ghost>거절</Button>
-  </>
-);
-const recommendButton = requested => (
-  <Button size="small" type={requested ? 'default' : 'dashed'}>{requested ? '친구신청' : '요청 중'}</Button>
-);
-const myFriendButton = () => (
-  <Button size="small" type="link" className="myfriends-delete">삭제</Button>
-);
-
-const FriendsList = ({ friends, type }) => {
+const FriendsList = ({ friends, FriendsButton }) => {
   return (
     <div className="friends-list">
       <List
         dataSource={friends}
         renderItem={friend => {
-          const { name, school, id, location, profileImage, requested } = friend;
+          const { name, school, id, location, profileImage } = friend;
           return (
             <List.Item key={id}>
               <List.Item.Meta
@@ -35,9 +23,7 @@ const FriendsList = ({ friends, type }) => {
                 description={`${location} / ${school}`}
               />
               <div className="friends-button">
-                {type === 'request' && requestButton()}
-                {type === 'recommend' && recommendButton(requested)}
-                {type === 'myFriends' && myFriendButton()}
+                <FriendsButton friendInfo={friend} />
               </div>
             </List.Item>
           );
@@ -45,6 +31,15 @@ const FriendsList = ({ friends, type }) => {
       />
     </div>
   );
+};
+
+FriendsList.defaultProps = {
+  friends: [],
+};
+
+FriendsList.propTypes = {
+  friends: PropTypes.array,
+  FriendsButton: PropTypes.func.isRequired,
 };
 
 export default FriendsList;

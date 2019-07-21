@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Icon, Button } from 'antd';
 import { FriendsList } from 'components';
+import MyFriendsButton from './myFriendsButton';
 
 const myFriends = [
   { id: 1, name: '홍길동', location: '서울', school: '경희대학교', profileImage: '', requested: false },
@@ -28,7 +29,7 @@ class MyFriendsList extends Component {
         </div>
         <FriendsList
           friends={myFriends}
-          type="myFriends"
+          FriendsButton={MyFriendsButton}
         />
       </div>
     );

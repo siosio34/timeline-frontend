@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { FriendsList } from 'components';
+import RecommendFriendsButton from './recommendFriendsButton';
+import RequestFriendsButton from './requestFriendsButton';
 import './FriendsPage.css';
 
 const friends = [
@@ -29,7 +31,7 @@ class FriendsPage extends Component {
           <div className="friends-list-col">
             <FriendsList
               friends={friends}
-              type="request"
+              FriendsButton={RequestFriendsButton}
             />
           </div>
         </div>
@@ -38,7 +40,7 @@ class FriendsPage extends Component {
           <div className="friends-list-col">
             <FriendsList
               friends={noFriends}
-              type="recommend"
+              FriendsButton={RecommendFriendsButton}
             />
           </div>
         </div>
