@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Icon, Button, Checkbox } from 'antd';
+import { Icon, Button } from 'antd';
 import { Input, FormItem, Form } from '@jbuschke/formik-antd';
 
 import {
@@ -19,13 +19,11 @@ import './SigninForm.css';
 const InitialValue = {
   email: '',
   password: '',
-  remember: false,
 };
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().required('아이디를 입력해 주세요.'),
   password: Yup.string().required('패스워드를 입력해 주세요.'),
-  remember: Yup.boolean(),
 });
 
 class SignInForm extends React.Component {
@@ -59,12 +57,9 @@ class SignInForm extends React.Component {
                   placeholder="비밀번호"
                 />
               </FormItem>
-              <FormItem name="remember">
-                <Checkbox name="remember">자동로그인</Checkbox>
-                <Link className="login-form-forgot" to="/">
-                  비밀번호 찾기
-                </Link>
-              </FormItem>
+              <Link className="login-form-forgot" to="/">
+                비밀번호 찾기
+              </Link>
               <Button
                 type="primary"
                 htmlType="submit"
