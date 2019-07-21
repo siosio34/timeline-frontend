@@ -1,0 +1,24 @@
+.friends-list {
+  /*border: 1px solid;*/
+  padding: 10px;
+}
+
+.friends-button > button {
+  font-size: 13px;
+}
+
+.friends-button > button:hover {
+  font-weight: 700;
+}
+
+.friends-list .friends-button .ant-btn-primary {
+  border-color: #1890ff !important;
+}
+
+.friends-list .ant-list-item-meta-title {
+  margin-bottom: -3px;
+}
+
+.friends-list .ant-list-item-meta-description {
+  font-size: 13px;
+}
