@@ -69,9 +69,6 @@ class SignInForm extends React.Component {
               >
                 로그인
               </Button>
-              <div className="register-link">
-                아직 회원이 아니라면 <Link to="/join">회원가입</Link>해주세요.
-              </div>
             </Form>
           )}
         />
