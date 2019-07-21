@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FriendsList } from 'components';
+import {
+  FriendActionTypes,
+  FriendActionCreators,
+} from 'store/friends/friend.action';
+import FriendSelector from 'store/friends/friend.select';
 import RecommendFriendsButton from './recommendFriendsButton';
 import RequestFriendsButton from './requestFriendsButton';
 import './FriendsPage.css';
 
-const friends = [
-  { id: 1, name: '홍길동', location: '서울', school: '경희대학교', profileImage: '' },
-  { id: 2, name: '김철수', location: '경기', school: '경희대학교', profileImage: '' },
-  { id: 3, name: '박길동', location: '서울', school: '경희대학교', profileImage: '' },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '' },
-];
-
-const noFriends = [
-  { id: 1, name: '홍길동', location: '서울', school: '경희대학교', profileImage: '', requested: false },
-  { id: 2, name: '김철수', location: '경기', school: '경희대학교', profileImage: '', requested: true },
-  { id: 3, name: '박길동', location: '서울', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: true },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: true },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-];
-
 class FriendsPage extends Component {
+  componentDidMount() {
+    const { getRecommendFriends, getFriendsRequest } = this.props;
+
+    getFriendsRequest();
+    getRecommendFriends();
+  }
+
   render() {
+    const { friendRequests, recommendFriends } = this.props;
     return (
       <div className="friends-page ant-row">
         <div className="ant-col ant-col-12">
           <h2>대기중인 친구신청</h2>
           <div className="friends-list-col">
             <FriendsList
-              friends={friends}
+              friends={friendRequests}
               FriendsButton={RequestFriendsButton}
             />
           </div>
@@ -39,7 +36,7 @@ class FriendsPage extends Component {
           <h2>추천친구</h2>
           <div className="friends-list-col">
             <FriendsList
-              friends={noFriends}
+              friends={recommendFriends}
               FriendsButton={RecommendFriendsButton}
             />
           </div>
@@ -49,4 +46,23 @@ class FriendsPage extends Component {
   }
 }
 
-export default FriendsPage;
+FriendsPage.propTypes = {
+  getRecommendFriends: PropTypes.func.isRequired,
+  getFriendsRequest: PropTypes.func.isRequired,
+};
+
+const mapStatetoProps = state => ({
+  friendRequests: state.friend.friendRequests,
+  recommendFriends: state.friend.recommendFriends,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getRecommendFriends: () =>
+    dispatch(FriendActionCreators.getRecommendFriends()),
+  getFriendsRequest: () => dispatch(FriendActionCreators.getFriendsRequest()),
+});
+
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps,
+)(FriendsPage);

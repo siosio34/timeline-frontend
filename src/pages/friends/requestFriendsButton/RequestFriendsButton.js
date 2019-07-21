@@ -5,8 +5,12 @@ import { Button } from 'antd';
 const RequestFriendsButton = ({ friendInfo = {} }) => {
   return (
     <>
-      <Button size="small" style={{marginRight: '2px'}} type="primary" ghost>수락</Button>
-      <Button size="small" type="danger" ghost>거절</Button>
+      <Button size="small" style={{ marginRight: '2px' }} type="primary" ghost>
+        수락
+      </Button>
+      <Button size="small" type="danger" ghost>
+        거절
+      </Button>
     </>
   );
 };
