@@ -52,9 +52,7 @@ RequestApi.interceptors.response.use(
         const refreshToken = window.localStorage.getItem('refresh_token');
         return RequestApi.get(`/accounts/refresh/${refreshToken}`)
           .then(({ data }) => {
-            console.log('data', data);
             const { access_token, refresh_token } = data;
-
             window.localStorage.setItem('access_token', access_token);
             window.localStorage.setItem('refresh_token', refresh_token);
             isRefreshing = false;
@@ -75,7 +73,7 @@ RequestApi.interceptors.response.use(
       const retryOrigReq = new Promise(resolve => {
         subscribeTokenRefresh(token => {
           originalRequest.headers.Authorization = `bearer ${token}`;
-          resolve(axios(originalRequest));
+          resolve(RequestApi(originalRequest));
         });
       });
 

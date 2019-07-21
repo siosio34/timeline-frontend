@@ -79,7 +79,11 @@ const cityList = [
 
 class RegisterForm extends React.Component {
   render() {
-    const { registerLoading, checkDuplicateLoading } = this.props;
+    const {
+      registerLoading,
+      checkDuplicateLoading,
+      isCheckDuplicate,
+    } = this.props;
     const { register, checkDuplicateEmail } = this.props;
 
     return (
@@ -96,6 +100,7 @@ class RegisterForm extends React.Component {
                 <SearchInput
                   name="email"
                   onSearch={checkDuplicateEmail}
+                  disabled={isCheckDuplicate}
                   loading={checkDuplicateLoading}
                   buttonText="중복체크하기"
                 />
@@ -147,6 +152,7 @@ class RegisterForm extends React.Component {
 RegisterForm.propTypes = {
   registerLoading: PropTypes.bool.isRequired,
   checkDuplicateLoading: PropTypes.bool.isRequired,
+  isCheckDuplicate: PropTypes.bool.isRequired,
   register: PropTypes.func.isRequired,
   checkDuplicateEmail: PropTypes.func.isRequired,
 };
@@ -159,15 +165,10 @@ const checkDuplicateLoadingSelector = createLoadingSelector(
   AccountActionTypes.CHECK_DUPLICATE_EMAIL.BASE,
 );
 
-const registerErrorSelector = createErrorMessageSelector(
-  AccountActionTypes.REGISTER.BASE,
-);
-
 const mapStateToProps = state => ({
   registerLoading: registerLoadingSelector(state),
-  registerError: registerErrorSelector(state),
   checkDuplicateLoading: checkDuplicateLoadingSelector(state),
-  isDuplicatedEmail: AccountSelector.isDuplicateEmail(state),
+  isCheckDuplicate: AccountSelector.isCheckDuplicate(state),
 });
 
 const mapDispatchToProps = dispatch => ({

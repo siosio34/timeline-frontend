@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { AccountApi } from 'api';
-
+import { message } from 'antd';
 import { AccountActionTypes, AccountActionCreators } from './account.action';
 
 export function* login(action) {
@@ -49,6 +49,7 @@ export function* checkDuplicateEmail(action) {
     yield put(AccountActionCreators.checkDuplicateEmail.request());
     const response = yield call(AccountApi.checkDuplicateEmail, action.payload);
     yield put(AccountActionCreators.checkDuplicateEmail.success({ response }));
+    message.success('사용가능한 이메일입니다.');
   } catch (error) {
     yield put(AccountActionCreators.checkDuplicateEmail.failure(error));
   }

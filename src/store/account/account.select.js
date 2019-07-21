@@ -8,9 +8,9 @@ const accountToken = createSelector(
   accountState => accountState.token,
 );
 
-const isDuplicateEmail = createSelector(
+const isCheckDuplicate = createSelector(
   selectAccount,
-  accountState => accountState.isDuplicateEmail,
+  accountState => accountState.isCheckDuplicate,
 );
 // eslint-disable-next-line import/prefer-default-export
-export default { accountToken, isDuplicateEmail };
+export default { accountToken, isCheckDuplicate };
