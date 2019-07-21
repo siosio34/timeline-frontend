@@ -1,6 +1,10 @@
 .friends-list {
   /*border: 1px solid;*/
-  padding: 10px;
+  /*padding: 15px;*/
+}
+
+.friends-list .ant-avatar.ant-avatar-icon {
+  margin-top: 5px;
 }
 
 .friends-button > button {
@@ -9,6 +13,13 @@
 
 .friends-button > button:hover {
   font-weight: 700;
+}
+
+.friends-button > .ant-btn.ant-btn-link {
+  color: rgba(0, 0, 0, 0.45);
+}
+.friends-button > .ant-btn.ant-btn-link:hover {
+  color: #03cf5d;
 }
 
 .friends-list .friends-button .ant-btn-primary {
@@ -20,5 +31,9 @@
 }
 
 .friends-list .ant-list-item-meta-description {
-  font-size: 13px;
+  font-size: 12px;
+}
+
+.myfriends-delete {
+  margin-right: 5px;
 }
