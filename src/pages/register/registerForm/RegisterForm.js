@@ -14,6 +14,7 @@ import {
 } from 'store/account/account.action';
 import AccountSelector from 'store/account/account.select';
 import createLoadingSelector from 'utils/createLoadingSelector';
+import createErrorMessageSelector from 'utils/createErrorMessageSelector';
 
 import './RegisterForm.css';
 
@@ -158,8 +159,13 @@ const checkDuplicateLoadingSelector = createLoadingSelector(
   AccountActionTypes.CHECK_DUPLICATE_EMAIL.BASE,
 );
 
+const registerErrorSelector = createErrorMessageSelector(
+  AccountActionTypes.REGISTER.BASE,
+);
+
 const mapStateToProps = state => ({
   registerLoading: registerLoadingSelector(state),
+  registerError: registerErrorSelector(state),
   checkDuplicateLoading: checkDuplicateLoadingSelector(state),
   isDuplicatedEmail: AccountSelector.isDuplicateEmail(state),
 });

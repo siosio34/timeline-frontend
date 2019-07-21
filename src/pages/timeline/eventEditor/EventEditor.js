@@ -37,20 +37,12 @@ class EventEditor extends React.Component {
     this.setState({ fileList: urlList });
   };
 
-  handleSubmit = () => {
-    const { registerEvent } = this.props;
-    registerEvent({
-      content: '',
-      files: [],
-    });
-  };
-
   render() {
     const { fileList, imageUploaderVisible } = this.state;
     const { registerEvent } = this.props;
 
     return (
-      <div style={{ maxWidth: '500px', margin: 'auto', }}>
+      <div style={{ maxWidth: '500px', margin: 'auto' }}>
         <Formik
           initialValues={InitialValue}
           onSubmit={values => {
@@ -78,16 +70,19 @@ class EventEditor extends React.Component {
                 <Button
                   type="primary"
                   className="editor-button"
-                  onClick={() => this.setState({ imageUploaderVisible: !imageUploaderVisible })}
+                  onClick={() =>
+                    this.setState({
+                      imageUploaderVisible: !imageUploaderVisible,
+                    })
+                  }
                   shape="circle"
                   icon="picture"
                 />
               </div>
             </Form>
           )}
-        >
-        </Formik>
-        { imageUploaderVisible && (
+        />
+        {imageUploaderVisible && (
           <div className="editor-image-uploader">
             <ImageUploader
               fileList={fileList}
@@ -105,7 +100,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  registerEvent: inputEventData => dispatch(EventActionCreators.registerEvent(inputEventData)),
+  registerEvent: inputEventData =>
+    dispatch(EventActionCreators.registerEvent(inputEventData)),
 });
 
 export default connect(

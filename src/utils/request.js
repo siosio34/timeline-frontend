@@ -54,6 +54,7 @@ RequestApi.interceptors.response.use(
           .then(({ data }) => {
             console.log('data', data);
             const { access_token, refresh_token } = data;
+
             window.localStorage.setItem('access_token', access_token);
             window.localStorage.setItem('refresh_token', refresh_token);
             isRefreshing = false;

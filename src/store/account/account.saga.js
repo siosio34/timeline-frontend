@@ -4,17 +4,17 @@ import { push } from 'connected-react-router';
 import { AccountApi } from 'api';
 import { AccountActionTypes, AccountActionCreators } from './account.action';
 
-export function* signin(action) {
+export function* login(action) {
   try {
-    yield put(AccountActionCreators.signin.request());
-    const response = yield call(AccountApi.signin, action.payload);
+    yield put(AccountActionCreators.login.request());
+    const response = yield call(AccountApi.login, action.payload);
     const { access_token, refresh_token } = response;
     window.localStorage.setItem('access_token', access_token);
     window.localStorage.setItem('refresh_token', refresh_token);
     yield put(push('/'));
-    yield put(AccountActionCreators.signin.success({ response }));
+    yield put(AccountActionCreators.login.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.signin.failure({ error }));
+    yield put(AccountActionCreators.login.failure({ error }));
   }
 }
 
@@ -49,12 +49,12 @@ export function* checkDuplicateEmail(action) {
     const response = yield call(AccountApi.checkDuplicateEmail, action.payload);
     yield put(AccountActionCreators.checkDuplicateEmail.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.checkDuplicateEmail.failure({ error }));
+    yield put(AccountActionCreators.checkDuplicateEmail.failure(error));
   }
 }
 
 export const accountSagas = [
-  takeLatest(AccountActionTypes.SIGNIN.INDEX, signin),
+  takeLatest(AccountActionTypes.LOGIN.INDEX, login),
   takeLatest(AccountActionTypes.REGISTER.INDEX, register),
   takeLatest(AccountActionTypes.REFRESH_TOKEN.INDEX, refreshToken),
   takeLatest(
