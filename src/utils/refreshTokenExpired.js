@@ -1,10 +1,10 @@
 import jwt_decode from 'jwt-decode';
 
-const refreshTokenNotExpired = () => {
-  const refreshToken = localStorage.getItem('refresh_token');
+const refreshTokenExpired = () => {
+  const refreshToken = window.localStorage.getItem('refresh_token');
 
   if (!refreshToken) {
-    return false;
+    return true;
   }
 
   const decodeToken = jwt_decode(refreshToken);
@@ -12,10 +12,10 @@ const refreshTokenNotExpired = () => {
   const currentTime = new Date().getTime() / 1000;
 
   if (decodeToken.exp < currentTime) {
-    return false;
+    return true;
   }
 
-  return true;
+  return false;
 };
 
-export default refreshTokenNotExpired;
+export default refreshTokenExpired;

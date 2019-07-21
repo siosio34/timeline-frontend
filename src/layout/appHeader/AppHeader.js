@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Avatar, Layout } from 'antd';
-import refreshTokenNotExpired from 'utils/refreshTokenNotExpired';
+
 import './AppHeader.css';
 
 const { Header } = Layout;
 
 // eslint-disable-next-line react/prop-types
-function AppHeader() {
+function AppHeader({ isLoggedIn }) {
   return (
     <Header className="app-header">
       <Link to="/">
@@ -17,7 +17,7 @@ function AppHeader() {
           Time<span className="color-emphasize">line</span>
         </h5>
       </Link>
-      {refreshTokenNotExpired() ? (
+      {isLoggedIn ? (
         <nav className="header-nav">
           <Link className="header-nav-item" to="/timeline">
             타임라인
@@ -42,7 +42,9 @@ function AppHeader() {
   );
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  isLoggedIn: state.account.isLoggedIn,
+});
 
 const mapDispatchToProps = () => ({});
 

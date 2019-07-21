@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import refreshTokenNotExpired from 'utils/refreshTokenNotExpired';
+import { connect } from 'react-redux';
+// import refreshTokenNotExpired from 'utils/refreshTokenExpired';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      refreshTokenNotExpired() ? (
+      isLoggedIn ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -20,4 +21,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+  isLoggedIn: state.account.isLoggedIn,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PrivateRoute);

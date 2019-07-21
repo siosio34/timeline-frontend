@@ -14,7 +14,6 @@ import {
 } from 'store/account/account.action';
 import AccountSelector from 'store/account/account.select';
 import createLoadingSelector from 'utils/createLoadingSelector';
-import createErrorMessageSelector from 'utils/createErrorMessageSelector';
 
 import './RegisterForm.css';
 
