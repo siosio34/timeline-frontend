@@ -19,7 +19,7 @@ RequestApi.interceptors.request.use(
     const isLoginURL = config.url && config.url.includes('accounts');
 
     if (accessToken && isLoginURL === false) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `bearer ${accessToken}`;
     }
 
     return config;
@@ -50,8 +50,9 @@ RequestApi.interceptors.response.use(
       if (!isRefreshing) {
         isRefreshing = true;
         const refreshToken = window.localStorage.getItem('refresh_token');
-        return RequestApi.post(`/accounts/refresh/${refreshToken}`)
+        return RequestApi.get(`/accounts/refresh/${refreshToken}`)
           .then(({ data }) => {
+            console.log('data', data);
             const { access_token, refresh_token } = data;
             window.localStorage.setItem('access_token', access_token);
             window.localStorage.setItem('refresh_token', refresh_token);
@@ -72,7 +73,7 @@ RequestApi.interceptors.response.use(
 
       const retryOrigReq = new Promise(resolve => {
         subscribeTokenRefresh(token => {
-          originalRequest.headers.Authorization = `Bearer ${token}`;
+          originalRequest.headers.Authorization = `bearer ${token}`;
           resolve(axios(originalRequest));
         });
       });
