@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { AccountApi } from 'api';
+
 import { AccountActionTypes, AccountActionCreators } from './account.action';
 
 export function* login(action) {
@@ -14,7 +15,7 @@ export function* login(action) {
     yield put(push('/'));
     yield put(AccountActionCreators.login.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.login.failure({ error }));
+    yield put(AccountActionCreators.login.failure(error));
   }
 }
 
@@ -28,7 +29,7 @@ export function* register(action) {
     yield put(push('/'));
     yield put(AccountActionCreators.register.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.register.failure({ error }));
+    yield put(AccountActionCreators.register.failure(error));
   }
 }
 
@@ -39,7 +40,7 @@ export function* refreshToken() {
     const response = yield call(AccountApi.refreshToken, tokenForRefresh);
     yield put(AccountActionCreators.refreshToken.success({ response }));
   } catch (error) {
-    yield put(AccountActionCreators.refreshToken.failure({ error }));
+    yield put(AccountActionCreators.refreshToken.failure(error));
   }
 }
 
