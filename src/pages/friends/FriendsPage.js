@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FriendsList from './friendsList';
+import { FriendsList } from 'components';
 import './FriendsPage.css';
 
 const friends = [
@@ -26,17 +26,21 @@ class FriendsPage extends Component {
       <div className="friends-page ant-row">
         <div className="ant-col ant-col-12">
           <h2>대기중인 친구신청</h2>
-          <FriendsList
-            friends={friends}
-            isRecommend={false}
-          />
+          <div className="friends-list-col">
+            <FriendsList
+              friends={friends}
+              type="request"
+            />
+          </div>
         </div>
         <div className="ant-col ant-col-12">
           <h2>추천친구</h2>
-          <FriendsList
-            friends={noFriends}
-            isRecommend
-          />
+          <div className="friends-list-col">
+            <FriendsList
+              friends={noFriends}
+              type="recommend"
+            />
+          </div>
         </div>
       </div>
     );
