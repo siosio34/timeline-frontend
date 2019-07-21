@@ -1,7 +1,7 @@
 import RequestApi from 'utils/request';
 
-const signin = signinAccountData => {
-  return RequestApi.post('/accounts/signin', { ...signinAccountData });
+const login = loginAccountData => {
+  return RequestApi.post('/accounts/login', { ...loginAccountData });
 };
 
 const register = registerAccountData => {
@@ -17,7 +17,7 @@ const checkDuplicateEmail = email => {
 };
 
 export default {
-  signin,
+  login,
   register,
   refreshToken,
   checkDuplicateEmail,

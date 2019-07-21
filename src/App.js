@@ -5,11 +5,14 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router';
 
 import history from 'utils/history';
+import IntroPage from 'pages/intro';
 import RegisterPage from 'pages/register';
-import SignInPage from 'pages/signin';
 import Timeline from 'pages/timeline';
+import LoginPage from 'pages/login';
 import configureStore from 'store/configureStore';
 import { AppHeader, AppContent } from 'layout';
+
+import refreshTokenNotExpired from 'utils/refreshTokenNotExpired';
 
 import './App.css';
 import 'antd/dist/antd.css';
@@ -24,9 +27,13 @@ function App() {
         <AppHeader />
         <AppContent className="app-content">
           <Switch>
-            <Route path="/" exact component={Timeline} />
+            <Route
+              path="/"
+              exact
+              component={refreshTokenNotExpired() ? Timeline : IntroPage}
+            />
             <Route path="/register" component={RegisterPage} />
-            <Route path="/login" component={SignInPage} />
+            <Route path="/login" component={LoginPage} />
           </Switch>
         </AppContent>
       </ConnectedRouter>

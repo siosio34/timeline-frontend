@@ -1,14 +1,14 @@
-.signin-form {
+.login-form {
   max-width: 300px;
   margin: auto;
   padding-top: 20px;
 }
 
-.signin-form a {
+.login-form a {
   color: #03cf5d;
 }
 
-.signin-form .ant-form-item {
+.login-form .ant-form-item {
   margin-bottom: 10px;
 }
 
