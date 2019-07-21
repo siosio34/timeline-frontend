@@ -8,13 +8,14 @@ const refreshTokenNotExpired = () => {
   }
 
   const decodeToken = jwt_decode(refreshToken);
+
   const currentTime = new Date().getTime() / 1000;
 
   if (decodeToken.exp < currentTime) {
-    return true;
+    return false;
   }
 
-  return false;
+  return true;
 };
 
 export default refreshTokenNotExpired;
