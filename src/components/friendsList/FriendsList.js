@@ -9,7 +9,7 @@ const FriendsList = ({ friends, FriendsButton }) => {
       <List
         dataSource={friends}
         renderItem={friend => {
-          const { name, school, id, location, profileImage } = friend;
+          const { username, school, id, state, profileImage } = friend;
           return (
             <List.Item key={id}>
               <List.Item.Meta
@@ -19,8 +19,8 @@ const FriendsList = ({ friends, FriendsButton }) => {
                     icon={profileImage ? '' : 'user'}
                   />
                 }
-                title={name}
-                description={`${location} / ${school}`}
+                title={username}
+                description={`${state} / ${school}`}
               />
               <div className="friends-button">
                 <FriendsButton friendInfo={friend} />
