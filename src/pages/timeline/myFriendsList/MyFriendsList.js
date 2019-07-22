@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Input, Icon, Button } from 'antd';
 import { FriendsList } from 'components';
+import { FriendActionCreators } from 'store/friends/friend.action';
 import MyFriendsButton from './myFriendsButton';
 
-const myFriends = [
-  { id: 1, name: '홍길동', location: '서울', school: '경희대학교', profileImage: '', requested: false },
-  { id: 2, name: '김철수', location: '경기', school: '경희대학교', profileImage: '', requested: true },
-  { id: 3, name: '박길동', location: '서울', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: true },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: true },
-  { id: 4, name: '이길동', location: '인천', school: '경희대학교', profileImage: '', requested: false },
-];
-
 class MyFriendsList extends Component {
+  componentDidMount() {
+    const { getFriends } = this.props;
+    getFriends();
+  }
+
   render() {
+    const { friends } = this.props;
     return (
       <div>
         <h3>내 친구목록</h3>
@@ -28,7 +26,7 @@ class MyFriendsList extends Component {
           <Button style={{ marginLeft: '5px'}} type="primary" shape="circle" icon="search" />
         </div>
         <FriendsList
-          friends={myFriends}
+          friends={friends}
           FriendsButton={MyFriendsButton}
         />
       </div>
@@ -36,4 +34,24 @@ class MyFriendsList extends Component {
   }
 }
 
-export default MyFriendsList;
+MyFriendsList.defaultProps = {
+  friends: [],
+};
+
+MyFriendsList.propTypes = {
+  getFriends: PropTypes.func.isRequired,
+  friends: PropTypes.array,
+};
+
+const mapStateToProps = state => ({
+  friends: state.friend.friends,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getFriends: () => dispatch(FriendActionCreators.getFriends()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyFriendsList);
