@@ -1,0 +1,48 @@
+.my-profile {
+  max-width: 230px;
+  margin-left: auto;
+}
+
+.profile-basic {
+  max-width: 200px;
+  position: relative;
+}
+
+.profile-major {
+  display: inline-block;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin: 10px 0 0 15px;
+}
+
+.profile-id {
+  margin: -5px 0 15px 15px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+/*.profile-basic .ant-btn {*/
+/*  position: absolute;*/
+/*  top: 20px;*/
+/*  right: 0;*/
+/*  color: #03cf5d;*/
+/*}*/
+
+/*.profile-basic .ant-btn:hover, .profile-basic .ant-btn:focus {*/
+/*  color: #03cf5d;*/
+/*  font-weight: 900;*/
+/*}*/
+
+.profile-meta {
+  margin-left: 15px;
+  margin-bottom: 2px;
+}
+
+.profile-meta > span {
+  margin-left: 5px;
+  letter-spacing: -0.5px;
+}

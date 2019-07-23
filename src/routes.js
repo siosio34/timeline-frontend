@@ -8,6 +8,7 @@ import RegisterPage from 'pages/register';
 import Timeline from 'pages/timeline';
 import FriendsPage from 'pages/friends';
 import LoginPage from 'pages/login';
+import ProfilePage from 'pages/profile';
 
 function RouteComponent({ isLoggedIn }) {
   return (
@@ -16,6 +17,7 @@ function RouteComponent({ isLoggedIn }) {
       <Route path="/register" component={RegisterPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/friends" component={FriendsPage} />
+      <Route path="/profile" component={ProfilePage} />
     </Switch>
   );
 }
