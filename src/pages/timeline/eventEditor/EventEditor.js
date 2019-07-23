@@ -42,14 +42,14 @@ class EventEditor extends React.Component {
     const { registerEvent } = this.props;
 
     return (
-      <div style={{ maxWidth: '500px', margin: 'auto' }}>
+      <div className="event-editor">
         <Formik
           initialValues={InitialValue}
           onSubmit={values => {
             registerEvent({ ...values, files: fileList });
           }}
           render={() => (
-            <Form>
+            <Form style={{ position: 'relative' }}>
               <FormItem name="content">
                 <TextArea
                   name="content"
@@ -57,6 +57,7 @@ class EventEditor extends React.Component {
                   style={{ resize: 'none' }}
                   rows={1}
                   placeholder="지금 떠오르는 생각을 친구들에게 공유해보세요."
+                  autosize
                 />
               </FormItem>
               <div className="editor-button-area">

@@ -1,0 +1,52 @@
+.timeline-item {
+  /*background-color: white;*/
+  /*padding: 15px;*/
+  /*border-radius: 15px;*/
+  /*box-shadow: 0 0 10px rgba(58, 62, 49, .05);*/
+  /*margin-bottom: 15px;*/
+  border-bottom: 1px dashed lightgray;
+  margin-top: 13px;
+  padding: 0 10px;
+}
+
+.timeline-item-info {
+  position: relative;
+  letter-spacing: -0.5px;
+}
+
+.timeline-item-info .ant-avatar {
+  top: -11px;
+}
+
+.timeline-item-datetime {
+  font-size: 13px;
+  color: gray;
+}
+
+.meta-section {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.timeline-item-info .author-name {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.timeline-item-info .author-thumbnail {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  margin-right: 30px;
+  position: absolute;
+  top: 7px;
+  left: 20px;
+}
+
+.timeline-item-contents {
+  padding: 10px;
+  text-align:justify;
+}

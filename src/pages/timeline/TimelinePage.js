@@ -2,6 +2,13 @@ import React from 'react';
 
 import EventEditor from './eventEditor';
 import MyFriendsList from './myFriendsList';
+import EventList from './eventList';
+
+const eventListMock = [
+  { id: 1, author: '홍길동', content: '내이름은 홍길동이야.', images: [], timestamp: '2019-03-18' },
+  { id: 2, author: '김철수', content: '내이름은 홍ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ길동이야.', images: [], timestamp: '2019-03-18' },
+  { id: 3, author: '김영희', content: '내이름은 홍길동이야.', images: [], timestamp: '2019-03-18' },
+];
 
 class TimelinePage extends React.Component {
   componentDidMount() {}
@@ -9,10 +16,11 @@ class TimelinePage extends React.Component {
   render() {
     return (
       <div className="ant-row">
-        <h1 style={{textAlign: 'center'}}>타임라인</h1>
         <div className="ant-col ant-col-16">
-          <h4>여기는 이벤트 목록</h4>
           <EventEditor />
+          <EventList
+            events={eventListMock}
+          />
         </div>
         <div className="ant-col ant-col-8">
           <MyFriendsList />
