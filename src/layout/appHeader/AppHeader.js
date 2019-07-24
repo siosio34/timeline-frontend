@@ -19,14 +19,14 @@ function AppHeader({ isLoggedIn }) {
       </Link>
       {isLoggedIn ? (
         <nav className="header-nav">
-          <Link className="header-nav-item" to="/timeline">
+          <Link className="header-nav-item" to="/">
             타임라인
           </Link>
           <Link className="header-nav-item" to="/profile">
             내 프로필
           </Link>
           <Link className="header-nav-item" to="/friends">
-            친구목록
+            친구관리
           </Link>
           <Avatar className="user-icon" shape="square" icon="user" />
         </nav>
