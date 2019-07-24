@@ -4,8 +4,9 @@
 }
 
 .app-content.ant-layout-content {
+  max-width: 900px;
+  margin: auto;
   border-radius: 15px;
-  margin: 20px;
   padding: 30px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, .075);
