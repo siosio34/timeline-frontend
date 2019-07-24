@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
@@ -6,7 +7,7 @@ import { Button } from 'antd';
 import { Input, FormItem, Form } from '@jbuschke/formik-antd';
 
 import { ImageUploader } from 'components';
-import { EventActionCreators } from '../../../store/event/event.action';
+import { EventActionCreators } from 'store/event/event.action';
 import './EventEditor.css';
 
 const { TextArea } = Input;
@@ -22,9 +23,9 @@ class EventEditor extends React.Component {
       imageUploaderVisible: false,
       fileList: [],
     };
-  }
+  };
 
-  handleChange = ({ fileList }) => {
+  handleChange({ fileList }) {
     const urlList = fileList.map(file => {
       if (file.response) {
         const { url, thumbUrl } = file.response;
@@ -95,6 +96,10 @@ class EventEditor extends React.Component {
     );
   }
 }
+
+EventEditor.propTypes = {
+  registerEvent: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   // loading: signinLoadingSelector(state),

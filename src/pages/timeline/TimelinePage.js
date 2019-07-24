@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EventEditor from './eventEditor';
+import { EventEditor } from 'components';
 import MyFriendsList from './myFriendsList';
 import EventList from './eventList';
 
