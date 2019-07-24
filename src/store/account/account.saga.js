@@ -13,7 +13,11 @@ export function* login(action) {
     window.localStorage.setItem('access_token', access_token);
     window.localStorage.setItem('refresh_token', refresh_token);
     yield put(push('/'));
-    yield put(AccountActionCreators.login.success({ response }));
+    yield put(AccountActionCreators.login.success({
+      userInfo: {
+        email: action.payload.email
+      }
+    }));
   } catch (error) {
     yield put(AccountActionCreators.login.failure(error));
   }
