@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { EventEditor } from 'components';
-import MyFriendsList from './myFriendsList';
+import { EventEditor, MyFriendsList } from 'components';
 import EventList from './eventList';
 
 const eventListMock = [
