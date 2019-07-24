@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FriendsList } from 'components';
+import { FriendsList, MyFriendsList } from 'components';
 import { Tabs, Icon } from 'antd';
 import {
   FriendActionTypes,
@@ -56,12 +56,9 @@ class FriendsPage extends Component {
           </Tabs>
         </div>
         <div className="ant-col ant-col-12">
-          <h2>내 친구</h2>
+          <h2>내 친구 목록</h2>
           <div className="friends-list-col">
-            <FriendsList
-              friends={recommendFriends}
-              FriendsButton={RecommendFriendsButton}
-            />
+            <MyFriendsList />
           </div>
         </div>
       </div>
@@ -77,7 +74,7 @@ FriendsPage.propTypes = {
   recommendFriends: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = state => ({
+const mapStateToProps = state => ({
   friendRequestsReceive: state.friend.friendRequests,
   friendRequestsSend: state.friend.friendRequests,
   recommendFriends: state.friend.recommendFriends,
@@ -90,6 +87,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStatetoProps,
+  mapStateToProps,
   mapDispatchToProps,
 )(FriendsPage);
