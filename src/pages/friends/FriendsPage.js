@@ -8,36 +8,64 @@ import {
   FriendActionCreators,
 } from 'store/friends/friend.action';
 import FriendSelector from 'store/friends/friend.select';
-import RecommendFriendsButton from './recommendFriendsButton';
+
+import ReceiveFriendButton from './receiveFriendsButton';
 import RequestFriendsButton from './requestFriendsButton';
+import RecommendFriendsButton from './recommendFriendsButton';
 import './FriendsPage.css';
 
 const { TabPane } = Tabs;
 
 class FriendsPage extends Component {
   componentDidMount() {
-    const { getRecommendFriends, getFriendsRequest } = this.props;
+    const {
+      getFriendsRequest,
+      getFriendsReceive,
+      getRecommendFriends,
+    } = this.props;
 
+    getFriendsReceive();
     getFriendsRequest();
     getRecommendFriends();
   }
 
   render() {
-    const { friendRequestsReceive, friendRequestsSend, recommendFriends } = this.props;
+    const {
+      friendRequestsReceive,
+      friendRequestsSend,
+      recommendFriends,
+    } = this.props;
+
     return (
       <div className="friends-page ant-row">
         <div className="ant-col ant-col-12">
           <h2>대기중인 친구신청</h2>
           <Tabs>
-            <TabPane tab={<span><Icon type="user-add" />받은 신청</span>} key="1">
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="user-add" />
+                  받은 신청
+                </span>
+              }
+              key="1"
+            >
               <div className="friends-list-col">
                 <FriendsList
                   friends={friendRequestsReceive}
-                  FriendsButton={RecommendFriendsButton}
+                  FriendsButton={ReceiveFriendButton}
                 />
               </div>
             </TabPane>
-            <TabPane tab={<span><Icon type="user" />보낸 신청</span>} key="2">
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="user" />
+                  보낸 신청
+                </span>
+              }
+              key="2"
+            >
               <div className="friends-list-col">
                 <FriendsList
                   friends={friendRequestsSend}
@@ -45,7 +73,15 @@ class FriendsPage extends Component {
                 />
               </div>
             </TabPane>
-            <TabPane tab={<span><Icon type="user" />추천 친구</span>} key="3">
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="user" />
+                  추천 친구
+                </span>
+              }
+              key="3"
+            >
               <div className="friends-list-col">
                 <FriendsList
                   friends={recommendFriends}
@@ -67,26 +103,30 @@ class FriendsPage extends Component {
 }
 
 FriendsPage.propTypes = {
-  getRecommendFriends: PropTypes.func.isRequired,
+  friendRequestsReceive: PropTypes.array.isRequired,
+  friendRequestsSend: PropTypes.array.isRequired,
+  recommendFriends: PropTypes.array.isRequired,
+
+  getFriendsReceive: PropTypes.func.isRequired,
   getFriendsRequest: PropTypes.func.isRequired,
-  friendRequestsReceive: PropTypes.object.isRequired,
-  friendRequestsSend: PropTypes.func.isRequired,
-  recommendFriends: PropTypes.func.isRequired,
+  getRecommendFriends: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  friendRequestsReceive: state.friend.friendRequests,
-  friendRequestsSend: state.friend.friendRequests,
+const mapStatetoProps = state => ({
+  friendRequestsReceive: state.friend.friendRequestsReceive,
+  friendRequestsSend: state.friend.friendRequestsSend,
   recommendFriends: state.friend.recommendFriends,
 });
 
 const mapDispatchToProps = dispatch => ({
+  getFriends: () => dispatch(FriendActionCreators.getFriends()),
+  getFriendsReceive: () => dispatch(FriendActionCreators.getFriendsReceive()),
+  getFriendsRequest: () => dispatch(FriendActionCreators.getFriendsRequest()),
   getRecommendFriends: () =>
     dispatch(FriendActionCreators.getRecommendFriends()),
-  getFriendsRequest: () => dispatch(FriendActionCreators.getFriendsRequest()),
 });
 
 export default connect(
-  mapStateToProps,
+  mapStatetoProps,
   mapDispatchToProps,
 )(FriendsPage);

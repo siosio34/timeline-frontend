@@ -8,6 +8,8 @@ export const FriendActionTypes = {
   GET_RECOMMEND_FRIENDS: makeAsyncActionTypes('GET_RECOMMEND_FRIENDS'),
   GET_REQUESTS_FRIENDS: makeAsyncActionTypes('GET_REQUESTS_FRIENDS'),
   CREATE_REQUEST_FRIEND: makeAsyncActionTypes('CREATE_REQUEST_FRIEND'),
+  CANCEL_REQUEST_FRIEND: makeAsyncActionTypes('CANCEL_REQUEST_FRIEND'),
+  GET_FRIEND_RECEIVE: makeAsyncActionTypes('GET_FRIEND_RECEIVE'),
   ALLOW_REQUEST_FRIEND: makeAsyncActionTypes('ALLOW_REQUEST_FRIEND'),
   DENY_REQUEST_FRIEND: makeAsyncActionTypes('DENY_REQUEST_FRIEND'),
 };
@@ -22,6 +24,12 @@ export const FriendActionCreators = {
   ),
   createFriendsRequest: makeAsyncActionCreator(
     FriendActionTypes.CREATE_REQUEST_FRIEND,
+  ),
+  cancelFriendsRequest: makeAsyncActionCreator(
+    FriendActionTypes.CANCEL_REQUEST_FRIEND,
+  ),
+  getFriendsReceive: makeAsyncActionCreator(
+    FriendActionTypes.GET_FRIEND_RECEIVE,
   ),
   allowFriendRequest: makeAsyncActionCreator(
     FriendActionTypes.ALLOW_REQUEST_FRIEND,

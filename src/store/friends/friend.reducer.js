@@ -2,7 +2,8 @@ import { FriendActionTypes } from './friend.action';
 
 export const initialState = {
   friends: [],
-  friendRequests: [],
+  friendRequestsReceive: [],
+  friendRequestsSend: [],
   recommendFriends: [],
 };
 
@@ -11,12 +12,19 @@ const friendReducer = (state = initialState, action) => {
     case FriendActionTypes.GET_FRIENDS.SUCCESS:
       return {
         ...state,
-        friends: action.payload.friends || [],
+        friends: action.payload.response.users || [],
       };
+
+    case FriendActionTypes.GET_FRIEND_RECEIVE.SUCCESS:
+      return {
+        ...state,
+        friendRequestsReceive: action.payload.response.users || [],
+      };
+
     case FriendActionTypes.GET_REQUESTS_FRIENDS.SUCCESS:
       return {
         ...state,
-        friendRequests: action.payload.response
+        friendRequestsSend: action.payload.response
           ? action.payload.response.users
           : [],
       };
