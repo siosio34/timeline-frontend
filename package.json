@@ -27,6 +27,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
+    "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.5",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2",
