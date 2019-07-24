@@ -1,26 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import { connect } from 'react-redux';
+import { FriendActionCreators } from 'store/friends/friend.action';
 
-const RequestFriendsButton = ({ friendInfo = {} }) => {
+const RequestFriendsButton = ({ friendInfo = {}, cancelFriendsRequest }) => {
   return (
-    <>
-      <Button size="small" style={{ marginRight: '2px' }} type="primary" ghost>
-        수락
-      </Button>
-      <Button size="small" type="danger" ghost>
-        거절
-      </Button>
-    </>
+    <Button
+      size="small"
+      type="dashed"
+      onClick={cancelFriendsRequest(friendInfo)}
+    >
+      요청 취소
+    </Button>
   );
 };
 
-RequestFriendsButton.defaultProps = {
-  friendInfo: {},
-};
-
 RequestFriendsButton.propTypes = {
-  friendInfo: PropTypes.object,
+  friendInfo: PropTypes.object.isRequired,
+  cancelFriendsRequest: PropTypes.func.isRequired,
 };
 
-export default RequestFriendsButton;
+const mapStatetoProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  cancelFriendsRequest: friendInfo => e =>
+    dispatch(FriendActionCreators.cancelFriendsRequest(friendInfo)),
+});
+
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps,
+)(RequestFriendsButton);

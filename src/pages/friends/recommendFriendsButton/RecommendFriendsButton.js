@@ -1,32 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import { connect } from 'react-redux';
+import { FriendActionCreators } from 'store/friends/friend.action';
 
-const RecommendFriendsButton = ({ friend }) => {
-  const { relationship } = friend;
-  const isRequested = relationship === 'REQUEST';
-
-  if (!isRequested) {
-    return (
-      <Button size="small">
+const RecommendFriendsButton = ({ friendInfo = {}, createFriendsRequest }) => {
+  return (
+    <>
+      <Button
+        size="small"
+        style={{ marginRight: '2px' }}
+        type="primary"
+        ghost
+        onClick={createFriendsRequest(friendInfo)}
+      >
         친구신청
       </Button>
-    );
-  }
-
-  return (
-    <Button size="small" type='dashed'>
-      요청 중
-    </Button>
+    </>
   );
 };
 
-RecommendFriendsButton.defaultProps = {
-  friend: {},
-};
-
 RecommendFriendsButton.propTypes = {
-  friend: PropTypes.object,
+  friendInfo: PropTypes.object.isRequired,
+  createFriendsRequest: PropTypes.func.isRequired,
 };
 
-export default RecommendFriendsButton;
+const mapStatetoProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  createFriendsRequest: friendInfo => e =>
+    dispatch(FriendActionCreators.createFriendsRequest(friendInfo)),
+});
+
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps,
+)(RecommendFriendsButton);

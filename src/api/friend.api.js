@@ -9,22 +9,30 @@ const getRecommendFriends = () => {
 };
 
 const getFriendsRequest = () => {
-  return RequestApi.get('/friends/requests');
+  return RequestApi.get('/friends/requests/sends');
 };
 
 const createFriendsRequest = requestEmail => {
-  return RequestApi.post('/friends/request', { requestEmail });
+  return RequestApi.post('/friends/requests/send', { requestEmail });
+};
+
+const cancelFriendsRequest = requestEmail => {
+  return RequestApi.delete(`/friends/requests/sends/${requestEmail}`);
+};
+
+const getFriendsReceive = () => {
+  return RequestApi.get('/friends/requests/receive');
 };
 
 const allowFriendRequest = requestEmail => {
-  return RequestApi.put(`/friends/requests/${requestEmail}`, {
-    accepted: true,
+  return RequestApi.put(`/friends/requests/receives/${requestEmail}`, {
+    accept: true,
   });
 };
 
 const denyFriendRequest = requestEmail => {
-  return RequestApi.put(`/friends/requests${requestEmail}`, {
-    accepted: false,
+  return RequestApi.put(`/friends/requests/receives/${requestEmail}`, {
+    accept: false,
   });
 };
 
@@ -33,6 +41,8 @@ export default {
   getRecommendFriends,
   getFriendsRequest,
   createFriendsRequest,
+  cancelFriendsRequest,
+  getFriendsReceive,
   allowFriendRequest,
   denyFriendRequest,
 };
