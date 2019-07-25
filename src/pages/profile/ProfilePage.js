@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventEditor } from 'components';
-import { TimelineActionCreators } from 'store/timeline/timeline.action';
+import { TimelineActionTypes, TimelineActionCreators } from 'store/timeline/timeline.action';
 import { ProfileActionCreators } from 'store/profile/profile.action';
+import createLoadingSelector from 'utils/createLoadingSelector';
 import MyProfile from './myProfile';
 import EventList from './eventList';
 
@@ -19,7 +20,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { events, myProfile } = this.props;
+    const { events, myProfile, timelineLoading } = this.props;
     return (
       <div className="ant-row">
         <div className="ant-col ant-col-8">
@@ -27,7 +28,11 @@ class ProfilePage extends Component {
         </div>
         <div className="ant-col ant-col-16">
           <EventEditor />
-          <EventList events={events} />
+          {timelineLoading ? (
+            <div>로딩 중</div>
+          ) : (
+            <EventList events={events} />
+          )}
         </div>
       </div>
     );
@@ -44,12 +49,18 @@ ProfilePage.propTypes = {
   userEmail: PropTypes.string.isRequired,
   events: PropTypes.array.isRequired,
   myProfile: PropTypes.object,
+  timelineLoading: PropTypes.bool.isRequired,
 };
+
+const timelineLoadingSelector = createLoadingSelector([
+  TimelineActionTypes.GET_USER_TIMELINE.BASE,
+]);
 
 const mapStateToProps = state => ({
   userEmail: state.account.userInfo.email,
   events: state.timeline.events,
   myProfile: state.profile.myProfile,
+  timelineLoading: timelineLoadingSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
