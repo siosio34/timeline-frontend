@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { EventEditor } from 'components';
+import { EventEditor, EventList } from 'components';
 import { TimelineActionTypes, TimelineActionCreators } from 'store/timeline/timeline.action';
 import { ProfileActionCreators } from 'store/profile/profile.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
 import MyProfile from './myProfile';
-import EventList from './eventList';
 
 class ProfilePage extends Component {
   componentDidMount() {
@@ -28,11 +27,7 @@ class ProfilePage extends Component {
         </div>
         <div className="ant-col ant-col-16">
           <EventEditor />
-          {timelineLoading ? (
-            <div>로딩 중</div>
-          ) : (
-            <EventList events={events} />
-          )}
+          <EventList events={events} loading={timelineLoading} />
         </div>
       </div>
     );

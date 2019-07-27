@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { EventEditor, MyFriendsList } from 'components';
+import { EventEditor, MyFriendsList, EventList } from 'components';
 import { TimelineActionCreators, TimelineActionTypes } from 'store/timeline/timeline.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
-import EventList from './eventList';
 
 class TimelinePage extends React.Component {
   componentDidMount() {
@@ -18,13 +17,10 @@ class TimelinePage extends React.Component {
       <div className="ant-row">
         <div className="ant-col ant-col-16">
           <EventEditor />
-          { timelineLoading ? (
-            <div>타임라인 로딩 중</div>
-          ) : (
-            <EventList
-              events={events}
-            />
-          )}
+          <EventList
+            events={events}
+            loading={timelineLoading}
+          />
         </div>
         <div className="ant-col ant-col-8">
           <MyFriendsList />
