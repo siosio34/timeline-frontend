@@ -6,6 +6,18 @@ export const initialState = {
 
 const timelineReducer = (state = initialState, action) => {
   switch (action.type) {
+    case TimelineActionTypes.GET_TIMELINE.INDEX:
+      return {
+        ...state,
+        events: [],
+      };
+
+    case TimelineActionTypes.GET_TIMELINE.SUCCESS:
+      return {
+        ...state,
+        events: action.payload.response.events,
+      };
+
     case TimelineActionTypes.GET_USER_TIMELINE.INDEX:
       return {
         ...state,

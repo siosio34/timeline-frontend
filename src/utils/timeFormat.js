@@ -1,3 +1,6 @@
 export const getValidTime = timestamp => {
-  return timestamp.split('T')[0];
+  if (timestamp) {
+    return timestamp.split('T')[0];
+  }
+  return '';
 };
