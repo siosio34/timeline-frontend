@@ -1,0 +1,9 @@
+.anticon.anticon-loading > svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.anticon.anticon-loading {
+  display: block;
+  margin: auto;
+}
