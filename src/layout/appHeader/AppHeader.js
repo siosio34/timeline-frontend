@@ -28,6 +28,9 @@ function AppHeader({ isLoggedIn }) {
           <Link className="header-nav-item" to="/friends">
             친구관리
           </Link>
+          <Link className="header-nav-item" to="/login">
+            로그아웃
+          </Link>
           <Avatar className="user-icon" shape="square" icon="user" />
         </nav>
       ) : (

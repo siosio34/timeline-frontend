@@ -13,13 +13,25 @@ export function* login(action) {
     window.localStorage.setItem('access_token', access_token);
     window.localStorage.setItem('refresh_token', refresh_token);
     yield put(push('/'));
-    yield put(AccountActionCreators.login.success({
-      userInfo: {
-        email: action.payload.email
-      }
-    }));
+    yield put(
+      AccountActionCreators.login.success({
+        userInfo: {
+          email: action.payload.email,
+        },
+      }),
+    );
   } catch (error) {
     yield put(AccountActionCreators.login.failure(error));
+  }
+}
+
+export function* logout() {
+  try {
+    yield put(AccountActionCreators.logout.request());
+    window.localStorage.clear();
+    yield put(AccountActionCreators.logout.success());
+  } catch (error) {
+    yield put(AccountActionCreators.logout.failure());
   }
 }
 
@@ -61,6 +73,7 @@ export function* checkDuplicateEmail(action) {
 
 export const accountSagas = [
   takeLatest(AccountActionTypes.LOGIN.INDEX, login),
+  takeLatest(AccountActionTypes.LOGOUT.INDEX, logout),
   takeLatest(AccountActionTypes.REGISTER.INDEX, register),
   takeLatest(AccountActionTypes.REFRESH_TOKEN.INDEX, refreshToken),
   takeLatest(
