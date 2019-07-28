@@ -1,11 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { AccountActionCreators } from 'store/account/account.action';
+import { connect } from 'react-redux';
 import LoginForm from './loginForm';
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    const { logout } = this.props;
+    logout();
+  }
 
   render() {
     return (
@@ -20,4 +26,17 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+LoginPage.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(AccountActionCreators.logout()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginPage);
