@@ -15,7 +15,6 @@ RequestApi.interceptors.request.use(
     config.params = parsedParams;
 
     const accessToken = window.localStorage.getItem('access_token');
-
     const isLoginURL = config.url && config.url.includes('accounts');
 
     if (accessToken && isLoginURL === false) {
