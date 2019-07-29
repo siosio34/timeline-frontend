@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Layout } from 'antd';
 import { EventEditor, EventList } from 'components';
 import { TimelineActionTypes, TimelineActionCreators } from 'store/timeline/timeline.action';
 import { ProfileActionCreators } from 'store/profile/profile.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
 import MyProfile from './myProfile';
 import MyProfileEdit from './myProfileEdit';
+
+const { Content, Sider } = Layout;
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -36,17 +39,17 @@ class ProfilePage extends Component {
     const { toggleEditMode } = this;
     const { profileEditMode } = this.state;
     return (
-      <div className="ant-row">
-        <div className="ant-col ant-col-8">
+      <Layout style={{ background: 'none' }}>
+        <Sider style={{ background: 'none' }}>
           {profileEditMode ?
             <MyProfileEdit toggle={toggleEditMode} profile={myProfile} /> :
             <MyProfile toggle={toggleEditMode} profile={myProfile} />}
-        </div>
-        <div className="ant-col ant-col-16">
+        </Sider>
+        <Content style={{ paddingLeft: '30px'}}>
           <EventEditor />
           <EventList events={events} loading={timelineLoading} />
-        </div>
-      </div>
+        </Content>
+      </Layout>
     );
   }
 }
