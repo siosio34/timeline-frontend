@@ -5,6 +5,7 @@ export const initialState = {
   friendRequestsReceive: [],
   friendRequestsSend: [],
   recommendFriends: [],
+  friendSearchInputText: '',
 };
 
 const friendReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ const friendReducer = (state = initialState, action) => {
     case FriendActionTypes.GET_FRIENDS.INDEX:
       return {
         ...state,
-        friends: []
+        friends: [],
       };
 
     case FriendActionTypes.GET_FRIENDS.SUCCESS:
@@ -59,6 +60,12 @@ const friendReducer = (state = initialState, action) => {
         recommendFriends: action.payload.response
           ? action.payload.response.friends
           : [],
+      };
+
+    case FriendActionTypes.HANDLE_FRIEND_SEARCH_INPUT_CHANGE:
+      return {
+        ...state,
+        friendSearchInputText: action.payload,
       };
     default:
       return state;
