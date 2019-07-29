@@ -15,7 +15,13 @@ const profileReducer = (state = initialState, action) => {
     case ProfileActionTypes.GET_MY_PROFILE.SUCCESS:
       return {
         ...state,
-        myProfile: action.payload.user,
+        myProfile: action.payload,
+      };
+
+    case ProfileActionTypes.EDIT_MY_PROFILE.SUCCESS:
+      return {
+        ...state,
+        myProfile: action.payload,
       };
 
     default:

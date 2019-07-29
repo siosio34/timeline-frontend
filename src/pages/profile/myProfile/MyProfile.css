@@ -1,6 +1,5 @@
 .my-profile {
   max-width: 230px;
-  margin-left: auto;
 }
 
 .profile-basic {
@@ -25,21 +24,9 @@
   font-weight: 300;
 }
 
-/*.profile-basic .ant-btn {*/
-/*  position: absolute;*/
-/*  top: 20px;*/
-/*  right: 0;*/
-/*  color: #03cf5d;*/
-/*}*/
-
-/*.profile-basic .ant-btn:hover, .profile-basic .ant-btn:focus {*/
-/*  color: #03cf5d;*/
-/*  font-weight: 900;*/
-/*}*/
-
 .profile-meta {
   margin-left: 15px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
 
 .profile-meta > span {

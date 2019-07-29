@@ -13,6 +13,17 @@ export function* getMyProfile() {
   }
 }
 
+export function* editMyProfile(action) {
+  try {
+    yield put(ProfileActionCreators.editMyProfile.request());
+    const response = yield call(ProfileApi.editMyProfile, action.payload);
+    yield put(ProfileActionCreators.editMyProfile.success(response));
+  } catch (error) {
+    yield put(ProfileActionCreators.editMyProfile.failure(error));
+  }
+}
+
 export const profileSagas = [
   takeLatest(ProfileActionTypes.GET_MY_PROFILE.INDEX, getMyProfile),
+  takeLatest(ProfileActionTypes.EDIT_MY_PROFILE.INDEX, editMyProfile),
 ];
