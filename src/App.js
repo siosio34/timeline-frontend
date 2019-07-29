@@ -6,8 +6,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 
 import configureStore from 'store/configureStore';
-import { AppHeader, AppContent } from 'layout';
+import { AppTitle, AppHeader, AppContent } from 'layout';
 import { PersistGate } from 'redux-persist/integration/react';
+
 import RouteComponent from './routes';
 
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
+          <AppTitle />
           <AppHeader />
           <AppContent className="app-content">
             <RouteComponent />
