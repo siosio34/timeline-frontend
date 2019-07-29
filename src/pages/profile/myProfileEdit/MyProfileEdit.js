@@ -72,7 +72,7 @@ class MyProfileEdit extends Component {
                 />
               </FormItem>
               <Button
-                style={{ float: 'right' }}
+                style={{ float: 'right', color: '#03cf5d' }}
                 htmlType="submit"
                 type="link"
                 size="small"

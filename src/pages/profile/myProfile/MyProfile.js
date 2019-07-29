@@ -36,7 +36,7 @@ const MyProfile = ({ profile, toggle }) => {
           <span>{birth}</span>
         </div>
         <Button
-          style={{ float: 'right' }}
+          style={{ float: 'right', color: '#03cf5d' }}
           onClick={toggle}
           type="link"
           size="small"
