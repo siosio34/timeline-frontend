@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Icon, Button } from 'antd';
 import './MyProfile.css';
 
-class MyProfile extends Component {
-  render() {
-    const { profile } = this.props;
-    const { username, email, state, school, birth, imageUrl } = profile;
+const MyProfile = ({ profile, toggle }) => {
+  if (!profile || !profile.email) {
     return (
-      <div className="my-profile">
-        <Avatar shape="square" size={200} icon={!imageUrl && 'user'} src={imageUrl} />
+      <div className="my-profile" style={{ maxWidth: '200px' }}>
+        <Avatar shape="square" size={200} icon='user' />
+      </div>
+    )
+  }
+
+  const { username, email, state, school, birth, imageUrl } = profile;
+  return (
+    <div className="my-profile" style={{ maxWidth: '200px' }}>
+      <Avatar shape="square" size={200} icon={!imageUrl && 'user'} src={imageUrl} />
+      <div className="fade-in">
         <div className="profile-basic">
           <div className="profile-major">
             <div className="profile-name">{username}</div>
             <div className="profile-id">({email})</div>
           </div>
-          {/*<Button type="link" size="small">수정</Button>*/}
         </div>
         <div className="profile-meta">
           <Icon type="environment" />
@@ -29,13 +35,22 @@ class MyProfile extends Component {
           <Icon type="calendar" />
           <span>{birth}</span>
         </div>
+        <Button
+          style={{ float: 'right' }}
+          onClick={toggle}
+          type="link"
+          size="small"
+        >
+          수정
+        </Button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 MyProfile.propTypes = {
   profile: PropTypes.object.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default MyProfile;

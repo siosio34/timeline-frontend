@@ -6,8 +6,16 @@ import { TimelineActionTypes, TimelineActionCreators } from 'store/timeline/time
 import { ProfileActionCreators } from 'store/profile/profile.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
 import MyProfile from './myProfile';
+import MyProfileEdit from './myProfileEdit';
 
 class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profileEditMode: false,
+    }
+  }
+
   componentDidMount() {
     const { getUserTimeline, getMyProfile } = this.props;
     const { userEmail } = this.props;
@@ -18,12 +26,21 @@ class ProfilePage extends Component {
     getMyProfile();
   }
 
+  toggleEditMode = () => {
+    const { profileEditMode } = this.state;
+    this.setState({ profileEditMode: !profileEditMode });
+  };
+
   render() {
     const { events, myProfile, timelineLoading } = this.props;
+    const { toggleEditMode } = this;
+    const { profileEditMode } = this.state;
     return (
       <div className="ant-row">
         <div className="ant-col ant-col-8">
-          <MyProfile profile={myProfile} />
+          {profileEditMode ?
+            <MyProfileEdit toggle={toggleEditMode} profile={myProfile} /> :
+            <MyProfile toggle={toggleEditMode} profile={myProfile} />}
         </div>
         <div className="ant-col ant-col-16">
           <EventEditor />
@@ -34,16 +51,12 @@ class ProfilePage extends Component {
   }
 }
 
-ProfilePage.defaultProps = {
-  myProfile: {},
-};
-
 ProfilePage.propTypes = {
   getUserTimeline: PropTypes.func.isRequired,
   getMyProfile: PropTypes.func.isRequired,
   userEmail: PropTypes.string.isRequired,
   events: PropTypes.array.isRequired,
-  myProfile: PropTypes.object,
+  myProfile: PropTypes.object.isRequired,
   timelineLoading: PropTypes.bool.isRequired,
 };
 

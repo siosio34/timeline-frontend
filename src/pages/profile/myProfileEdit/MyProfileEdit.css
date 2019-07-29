@@ -1,0 +1,8 @@
+.my-profile .ant-form-item-label {
+  line-height: initial;
+}
+
+.my-profile .ant-form-item {
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
