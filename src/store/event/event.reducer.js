@@ -1,8 +1,6 @@
 import { EventActionTypes } from './event.action';
 
-export const initialState = {
-
-};
+export const initialState = {};
 
 const eventReducer = (state = initialState, action) => {
   switch (action.type) {

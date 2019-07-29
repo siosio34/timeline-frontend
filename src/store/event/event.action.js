@@ -4,7 +4,7 @@ import {
 } from 'utils/actionHelper';
 
 export const EventActionTypes = {
-  EVENT_REGISTER: makeAsyncActionTypes('EVENT_REGISTER')
+  EVENT_REGISTER: makeAsyncActionTypes('EVENT_REGISTER'),
 };
 
 export const EventActionCreators = {
