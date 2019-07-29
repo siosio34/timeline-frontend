@@ -7,10 +7,6 @@ const EventEmpty = () => {
   return (
     <div className="event-empty">
       <Empty
-        image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
-        imageStyle={{
-          height: 60,
-        }}
         description={
           <span>
           등록된 타임라인 이벤트가 없습니다.<br />
@@ -18,7 +14,7 @@ const EventEmpty = () => {
           </span>
         }
       >
-        <Link type="link" to="/friends">친구 찾으러 가기</Link>
+        <Link style={{ color: '#03cf5d' }} type="link" to="/friends">친구 찾으러 가기</Link>
       </Empty>
     </div>
   );
