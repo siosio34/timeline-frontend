@@ -1,8 +1,30 @@
-.my-profile .ant-form-item-label {
+.my-profile-edit .ant-form-item-label {
   line-height: initial;
 }
 
-.my-profile .ant-form-item {
+.my-profile-edit .ant-form-item {
   margin-bottom: 10px;
   margin-left: 5px;
+}
+
+.my-profile-edit .ant-upload-list.ant-upload-list-text {
+  display: none;
+}
+
+.my-profile-edit .anticon.anticon-loading > svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.my-profile-edit .anticon.anticon-loading {
+  display: block;
+  margin: auto;
+  margin-top: 70px;
+}
+
+.my-profile-edit .ant-avatar.ant-avatar-square.ant-avatar-icon, .profile-image > img {
+  cursor: pointer;
+}
+.my-profile-edit .ant-avatar.ant-avatar-square.ant-avatar-icon:hover, .profile-image > img:hover {
+  opacity: 0.7;
 }

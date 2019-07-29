@@ -1,9 +1,9 @@
-.anticon.anticon-loading > svg {
+.event-list .anticon.anticon-loading > svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.anticon.anticon-loading {
+.event-list .anticon.anticon-loading {
   display: block;
   margin: auto;
 }
