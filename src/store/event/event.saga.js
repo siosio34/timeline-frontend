@@ -8,6 +8,7 @@ export function* registerEvent(action) {
   try {
     yield put(EventActionCreators.registerEvent.request());
     const response = yield call(EventApi.register, action.payload);
+
     message.success('성공적으로 저장되었습니다.', 1.5);
   } catch (error) {
     yield put(EventActionCreators.registerEvent.failure({ error }));

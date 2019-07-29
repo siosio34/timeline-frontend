@@ -7,7 +7,7 @@ const parsingEmptyValueParams = params =>
 const RequestApi = axios.create();
 
 RequestApi.defaults.baseURL =
-  process.env.server || 'http://apis.timeline.ryulth.com';
+  process.env.server || 'http://timeline.ryulth.com/api';
 
 RequestApi.interceptors.request.use(
   config => {
