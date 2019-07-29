@@ -1,19 +1,20 @@
-.editor-image-uploader {
-  margin-top: 20px;
+.event-editor {
+  margin-bottom: 20px;
 }
 
-.ant-input.editor-textarea {
-  display: inline-block;
-  max-width: 80%;
+.event-editor .ant-form-item-control {
+  line-height: initial;
 }
 
-.editor-button {
-  display: inline-block;
-  margin-right: 7px;
+.event-editor .ant-form-item {
+  margin-bottom: initial;
 }
 
 .editor-button-area {
-  top: 4px;
-  position: absolute;
-  right: 26px
+  height: 32px;
+}
+
+.editor-button {
+  float: right;
+  margin-left: 5px;
 }
