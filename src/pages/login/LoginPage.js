@@ -10,6 +10,7 @@ import './LoginPage.css';
 class LoginPage extends React.Component {
   componentDidMount() {
     const { logout } = this.props;
+
     logout();
   }
 
