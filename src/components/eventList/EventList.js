@@ -7,7 +7,11 @@ import './EventList.css';
 
 const EventList = ({ events, loading }) => {
   if (loading) {
-    return <Icon type="loading" />
+    return (
+      <div className="event-list">
+        <Icon type="loading" />
+      </div>
+    )
   }
   if (!events.length) {
     return <EventEmpty />
