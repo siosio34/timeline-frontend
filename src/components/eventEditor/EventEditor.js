@@ -50,13 +50,13 @@ class EventEditor extends React.Component {
             registerEvent({ ...values, files: fileList });
           }}
           render={() => (
-            <Form style={{ position: 'relative' }}>
+            <Form>
               <FormItem name="content">
                 <TextArea
                   name="content"
                   className="editor-textarea"
                   style={{ resize: 'none' }}
-                  rows={1}
+                  rows={3}
                   placeholder="지금 떠오르는 생각을 친구들에게 공유해보세요."
                   autosize
                 />
@@ -66,9 +66,9 @@ class EventEditor extends React.Component {
                   type="primary"
                   htmlType="submit"
                   className="editor-button"
-                  shape="circle"
-                  icon="form"
-                />
+                >
+                  저장
+                </Button>
                 <Button
                   type="primary"
                   className="editor-button"
@@ -77,9 +77,9 @@ class EventEditor extends React.Component {
                       imageUploaderVisible: !imageUploaderVisible,
                     })
                   }
-                  shape="circle"
-                  icon="picture"
-                />
+                >
+                  사진
+                </Button>
               </div>
             </Form>
           )}

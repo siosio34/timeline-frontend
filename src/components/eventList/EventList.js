@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import EventCard from './eventCard';
+import EventEmpty from './eventEmpty';
 import './EventList.css';
 
 const EventList = ({ events, loading }) => {
@@ -9,7 +10,7 @@ const EventList = ({ events, loading }) => {
     return <Icon type="loading" />
   }
   if (!events.length) {
-    return <div>등록된 게시글이 없습니다.</div>
+    return <EventEmpty />
   }
   return (
     <>
