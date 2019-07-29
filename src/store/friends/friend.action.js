@@ -1,4 +1,5 @@
 import {
+  makeActionCreator,
   makeAsyncActionTypes,
   makeAsyncActionCreator,
 } from 'utils/actionHelper';
@@ -12,6 +13,7 @@ export const FriendActionTypes = {
   GET_FRIEND_RECEIVE: makeAsyncActionTypes('GET_FRIEND_RECEIVE'),
   ALLOW_REQUEST_FRIEND: makeAsyncActionTypes('ALLOW_REQUEST_FRIEND'),
   DENY_REQUEST_FRIEND: makeAsyncActionTypes('DENY_REQUEST_FRIEND'),
+  HANDLE_FRIEND_SEARCH_INPUT_CHANGE: 'HANDLE_FRIEND_SEARCH_INPUT_CHANGE',
 };
 
 export const FriendActionCreators = {
@@ -36,5 +38,8 @@ export const FriendActionCreators = {
   ),
   denyFriendRequest: makeAsyncActionCreator(
     FriendActionTypes.DENY_REQUEST_FRIEND,
+  ),
+  handleFriendSearchInputChange: makeActionCreator(
+    FriendActionTypes.HANDLE_FRIEND_SEARCH_INPUT_CHANGE,
   ),
 };

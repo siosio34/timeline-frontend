@@ -8,6 +8,7 @@ export function* getFriends() {
     yield put(FriendActionCreators.getFriends.request());
     const response = yield call(FriendApi.getFriends);
     yield put(FriendActionCreators.getFriends.success({ response }));
+    yield put(FriendActionCreators.handleFriendSearchInputChange(''));
   } catch (error) {
     yield put(FriendActionCreators.getFriends.failure(error));
   }
