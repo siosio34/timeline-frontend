@@ -19,6 +19,18 @@ export function* registerEvent(action) {
   }
 }
 
+export function* deleteEvent(action) {
+  try {
+    yield put(EventActionCreators.deleteEvent.request());
+    yield call(EventApi.deleteEvent, action.payload);
+    message.success('포스트가 삭제되었습니다.', 1.5);
+  } catch (error) {
+    yield put(EventActionCreators.deleteEvent.failure({ error }));
+    message.error('포스트를 삭제하지 못했습니다.\n다시 시도해주세요.', 1.5);
+  }
+}
+
 export const eventSagas = [
   takeLatest(EventActionTypes.EVENT_REGISTER.INDEX, registerEvent),
+  takeLatest(EventActionTypes.EVENT_DELETE.INDEX, deleteEvent),
 ];
