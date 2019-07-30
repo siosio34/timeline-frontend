@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createLoadingSelector from 'utils/createLoadingSelector';
+import createUploadOptions from 'utils/createUploadOptions';
 import {
   EventActionTypes,
   EventActionCreators,
 } from 'store/event/event.action';
 import EventEditorComponent from './EventEditorComponent';
 import './EventEditor.css';
-import axios from 'axios';
 
 const getBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -82,60 +82,14 @@ class EventEditor extends React.Component {
   };
 
   render() {
-    const {
-      previewVisible,
-      previewImage,
-      fileList,
-      uploaderVisible,
-    } = this.state;
-
-    const { registerEvent } = this.props;
-
-    const uploadProps = {
-      multiple: true,
-      listType: 'picture-card',
-      action:
-        'https://api-image.cloud.toast.com/image/v2.0/appkeys/nyXWlYDoYYEf6s19/images',
-      onPreview: this.handlePreview,
-      onChange: this.handleChange,
-      headers: {
-        Authorization: 'bMjzQRvR',
-        'Content-type': '',
-      },
-      file: fileList,
-      customRequest({
-        action,
-        data,
-        filename,
-        file,
-        headers,
-        onError,
-        onProgress,
-        onSuccess,
-        withCredentials,
-      }) {
-        const formData = new FormData();
-        formData.append('files', file);
-        formData.append(
-          'params',
-          JSON.stringify({
-            basepath: '/images/event',
-            autorename: true,
-            operationIds: ['250x150'],
-          }),
-        );
-        axios
-          .post(action, formData, {
-            headers,
-          })
-          .then(({ data: response }) => {
-            if (response.header.isSuccessful) {
-              onSuccess(response, file);
-            }
-          })
-          .catch(onError);
-      },
-    };
+    const uploadProps = createUploadOptions({
+      handleChange: this.handleChange,
+      handlePreview: this.handlePreview,
+      basePath: '/images/event',
+      operationIds: ['250x150'],
+      fileList: this.state.fileList,
+    });
+    console.log('uploadProps:', uploadProps);
 
     return (
       <EventEditorComponent
@@ -149,7 +103,11 @@ class EventEditor extends React.Component {
         previewImage={this.state.previewImage}
         loading={this.props.loading}
         fileList={this.state.fileList}
-        uploadProps={uploadProps}
+        uploadProps={{
+          ...uploadProps,
+          multiple: true,
+          listType: 'picture-card',
+        }}
       />
     );
   }

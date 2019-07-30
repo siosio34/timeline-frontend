@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import createLoadingSelector from 'utils/createLoadingSelector';
+import createUploadOptions from 'utils/createUploadOptions';
 import { ProfileActionTypes, ProfileActionCreators } from 'store/profile/profile.action';
 import MyProfileForm from './MyProfileForm';
 import MyProfileImage from './MyProfileImage';
@@ -13,41 +14,42 @@ class MyProfileEdit extends Component {
     super(props);
     const { profile } = this.props;
     this.state = {
-      profileImage: profile.imageUrl || '',
-      imageUploading: false,
+      profileImage: profile.profileImage,
     };
   }
 
   handleChange = info => {
-    const { status, response } = info.file;
-    if (status === 'uploading') {
-      this.setState({
-        imageUploading: true,
-        profileImage: '',
-      });
-      return;
-    }
+    const { status } = info.file;
     if (status === 'done') {
-      // console.log('file:', response);
+      const [ result ] = info.file.response.successes;
       this.setState({
-        profileImage: response.url,
+        profileImage: {
+          url: result.url,
+          thumbUrl: result.queues[0].url,
+        },
         imageUploading: false,
       });
     }
   };
 
   render() {
-    const { profileImage, imageUploading } = this.state;
+    const { profileImage, fileList } = this.state;
     const { profile, toggle, editLoading } = this.props;
     const { editMyProfile } = this.props;
     const { username, email, state, school, birth } = profile;
+    const uploadProps = createUploadOptions({
+      handlePreview: this.handlePreview,
+      handleChange: this.handleChange,
+      basePath: '/images/profile',
+      operationIds: ['256x256'],
+      fileList,
+    });
 
     return (
       <div className="my-profile-edit">
         <MyProfileImage
-          onChange={this.handleChange}
-          imageUploading={imageUploading}
-          profileImage={profileImage}
+          profileImage={profileImage.url}
+          uploadProps={uploadProps}
         />
         <div className="profile-basic">
           <div className="profile-major">
@@ -60,7 +62,7 @@ class MyProfileEdit extends Component {
           onSubmit={values => {
             editMyProfile({
               ...values,
-              imageUrl: profileImage,
+              profileImage,
             });
             toggle();
           }}

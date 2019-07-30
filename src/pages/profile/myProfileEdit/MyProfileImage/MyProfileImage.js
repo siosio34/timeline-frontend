@@ -2,18 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Upload } from 'antd';
 
-const MyProfileImage = ({ onChange, profileImage, imageUploading }) => {
-  const iconType = imageUploading ? 'loading' : 'user';
+const MyProfileImage = ({ profileImage, uploadProps }) => {
   return (
-    <Upload
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      onChange={onChange}
-    >
+    <Upload {...uploadProps}>
       <Avatar
         className="profile-image"
         shape="square"
         size={200}
-        icon={!profileImage && iconType}
+        icon={!profileImage && 'user'}
         src={profileImage}
       />
     </Upload>
@@ -25,9 +21,8 @@ MyProfileImage.defaultProps = {
 };
 
 MyProfileImage.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  uploadProps: PropTypes.object.isRequired,
   profileImage: PropTypes.string,
-  imageUploading: PropTypes.bool.isRequired,
 };
 
 export default MyProfileImage;
