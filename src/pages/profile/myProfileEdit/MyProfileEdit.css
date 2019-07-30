@@ -11,17 +11,6 @@
   display: none;
 }
 
-.my-profile-edit .anticon.anticon-loading > svg {
-  width: 3rem;
-  height: 3rem;
-}
-
-.my-profile-edit .anticon.anticon-loading {
-  display: block;
-  margin: auto;
-  margin-top: 70px;
-}
-
 .my-profile-edit .ant-avatar.ant-avatar-square.ant-avatar-icon, .profile-image > img {
   cursor: pointer;
 }

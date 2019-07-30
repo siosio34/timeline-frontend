@@ -12,10 +12,10 @@ const MyProfile = ({ profile, toggle }) => {
     )
   }
 
-  const { username, email, state, school, birth, imageUrl } = profile;
+  const { username, email, state, school, birth, profileImage } = profile;
   return (
     <div className="my-profile" style={{ maxWidth: '200px' }}>
-      <Avatar shape="square" size={200} icon={!imageUrl && 'user'} src={imageUrl} />
+      <Avatar shape="square" size={200} icon={!profileImage.url && 'user'} src={profileImage.url} />
       <div className="fade-in">
         <div className="profile-basic">
           <div className="profile-major">
