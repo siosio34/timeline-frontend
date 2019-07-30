@@ -14,7 +14,7 @@ const EventCard = ({ event, userEmail, deleteEvent }) => {
     content,
     createTime,
     updateTime,
-    thumbnail,
+    profileImage,
   } = event;
   return (
     <div className="timeline-item">
@@ -22,8 +22,8 @@ const EventCard = ({ event, userEmail, deleteEvent }) => {
         <Avatar
           size=""
           alt="user thumbnail"
-          src={thumbnail}
-          icon={!thumbnail && 'user'}
+          src={profileImage.thumbUrl}
+          icon={!profileImage.thumbUrl && 'user'}
         />
         <div className="meta-section">
           <div className="author-name">{authorUsername}</div>

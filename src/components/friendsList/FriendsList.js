@@ -20,8 +20,8 @@ const FriendsList = ({ friends, FriendsButton }) => {
               <List.Item.Meta
                 avatar={
                   <Avatar
-                    src={profileImage || ''}
-                    icon={profileImage ? '' : 'user'}
+                    src={profileImage ? profileImage.thumbUrl : ''}
+                    icon={(profileImage && profileImage.thumbUrl) ? '' : 'user'}
                   />
                 }
                 title={username}

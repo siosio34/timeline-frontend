@@ -6,15 +6,18 @@ import confirmSaga from 'store/modal/modal.saga';
 import { EventActionTypes, EventActionCreators } from './event.action';
 
 export function* registerEvent(action) {
-  const { eventData, resetForm } = action.payload;
+  const { eventData, resetForm, isMyProfile } = action.payload;
   try {
     yield put(EventActionCreators.registerEvent.request());
     yield call(EventApi.register, eventData);
     const userId = yield select(state => state.account.email);
     yield put(EventActionCreators.registerEvent.success());
     yield call(resetForm);
-    yield put(TimelineActionCreators.getTimeline({}));
-    yield put(TimelineActionCreators.getUserTimeline({ email: userId }));
+    if (isMyProfile) {
+      yield put(TimelineActionCreators.getUserTimeline({ email: userId }));
+    } else {
+      yield put(TimelineActionCreators.getTimeline({}));
+    }
   } catch (error) {
     yield put(EventActionCreators.registerEvent.failure({ error }));
   }
