@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Avatar, Button } from 'antd';
+import { Avatar, Button, Carousel } from 'antd';
 import { getValidTime } from 'utils/timeFormat';
 import { EventActionCreators } from 'store/event/event.action';
 import './EventCard.css';
@@ -15,6 +15,7 @@ const EventCard = ({ event, userEmail, deleteEvent }) => {
     createTime,
     updateTime,
     profileImage,
+    files,
   } = event;
   return (
     <div className="timeline-item">
@@ -44,6 +45,20 @@ const EventCard = ({ event, userEmail, deleteEvent }) => {
       <div className="timeline-item-contents">
         <div className="text-contents">{content}</div>
       </div>
+      {files.length === 1 && (
+        <img className="timeline-item-image" alt="이벤트 이미지" src={files[0].url} />
+      )}
+      {files.length > 1 && (
+        <Carousel>
+          {files.map(file => {
+            return (
+              <div key={`img_${file.thumbUrl}`}>
+                <img className="timeline-item-image" alt="이벤트 이미지" src={file.url} />
+              </div>
+            );
+          })}
+        </Carousel>
+      )}
     </div>
   );
 };
