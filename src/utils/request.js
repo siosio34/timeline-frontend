@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { pickBy } from 'lodash';
+import { message } from 'antd';
 
 const parsingEmptyValueParams = params =>
   pickBy(params, value => value != null && value !== '');
@@ -60,6 +61,8 @@ RequestApi.interceptors.response.use(
           return Promise.reject(error);
         });
     }
+
+    message.error('요청이 실패하였습니다.');
     return Promise.reject(error);
   },
 );

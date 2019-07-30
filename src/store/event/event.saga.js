@@ -16,7 +16,6 @@ export function* registerEvent(action) {
     message.success('성공적으로 저장되었습니다.', 1.5);
   } catch (error) {
     yield put(EventActionCreators.registerEvent.failure({ error }));
-    message.error('포스트 등록에 실패했습니다.', 1.5);
   }
 }
 
@@ -36,7 +35,6 @@ export function* deleteEvent(action) {
     message.success('포스트가 삭제되었습니다.', 1.5);
   } catch (error) {
     yield put(EventActionCreators.deleteEvent.failure({ error }));
-    message.error('포스트를 삭제하지 못했습니다.\n다시 시도해주세요.', 1.5);
   }
 }
 
