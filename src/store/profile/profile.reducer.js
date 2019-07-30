@@ -1,17 +1,21 @@
 import { ProfileActionTypes } from './profile.action';
 
 export const initialState = {
-  myProfile: {},
+  myProfile: {
+    email: '',
+    username: '',
+    state: '',
+    school: '',
+    birth: '',
+    profileImage: {
+      thumbUrl: '',
+      url: '',
+    }
+  },
 };
 
 const profileReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ProfileActionTypes.GET_MY_PROFILE.INDEX:
-      return {
-        ...state,
-        myProfile: {},
-      };
-
     case ProfileActionTypes.GET_MY_PROFILE.SUCCESS:
       return {
         ...state,
