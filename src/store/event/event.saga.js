@@ -33,6 +33,9 @@ export function* deleteEvent(action) {
 
     yield put(EventActionCreators.deleteEvent.request());
     yield call(EventApi.deleteEvent, action.payload);
+    const userId = yield select(state => state.account.email);
+    yield put(TimelineActionCreators.getTimeline({}));
+    yield put(TimelineActionCreators.getUserTimeline({ email: userId }));
   } catch (error) {
     yield put(EventActionCreators.deleteEvent.failure({ error }));
   }
