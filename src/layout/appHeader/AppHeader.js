@@ -1,15 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { Avatar, Layout } from 'antd';
-
 import './AppHeader.css';
 
 const { Header } = Layout;
 
-// eslint-disable-next-line react/prop-types
-function AppHeader({ isLoggedIn }) {
+const AppHeader = ({ isLoggedIn, myProfile }) => {
+  const { profileImage } = myProfile;
+  const src = profileImage ? profileImage.thumbUrl : '';
   return (
     <Header className="app-header">
       <Link to="/">
@@ -28,10 +28,15 @@ function AppHeader({ isLoggedIn }) {
           <Link className="header-nav-item" to="/friends">
             친구관리
           </Link>
-          <Link className="header-nav-item" to="/login">
+          <Link className="header-nav-item" to="/login" style={{ color: 'gray' }}>
             로그아웃
           </Link>
-          <Avatar className="user-icon" shape="square" icon="user" />
+          <Avatar
+            className="user-icon"
+            shape="square"
+            icon={!src && 'user'}
+            src={src}
+          />
         </nav>
       ) : (
         <Link
@@ -43,10 +48,16 @@ function AppHeader({ isLoggedIn }) {
       )}
     </Header>
   );
-}
+};
+
+AppHeader.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  myProfile: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   isLoggedIn: state.account.isLoggedIn,
+  myProfile: state.profile.myProfile,
 });
 
 const mapDispatchToProps = () => ({});
