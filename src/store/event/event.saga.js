@@ -3,6 +3,7 @@ import { message } from 'antd';
 
 import { EventApi } from 'api';
 import { TimelineActionCreators } from 'store/timeline/timeline.action';
+import confirmSaga from 'store/modal/modal.saga';
 import { EventActionTypes, EventActionCreators } from './event.action';
 
 export function* registerEvent(action) {
@@ -21,6 +22,15 @@ export function* registerEvent(action) {
 
 export function* deleteEvent(action) {
   try {
+    const confirmed = yield call(confirmSaga, {
+      title: '이벤트 삭제',
+      content: '해당 이벤트를 타임라인에서 삭제하시겠습니까?',
+    });
+
+    if (!confirmed) {
+      return;
+    }
+
     yield put(EventActionCreators.deleteEvent.request());
     yield call(EventApi.deleteEvent, action.payload);
     message.success('포스트가 삭제되었습니다.', 1.5);
