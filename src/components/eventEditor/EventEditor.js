@@ -19,16 +19,18 @@ const getBase64 = file => {
   });
 };
 
+const initialState = {
+  fileList: [],
+  successUploadImageUrls: [],
+  uploaderVisible: false,
+  previewVisible: false,
+  previewImage: '',
+};
+
 class EventEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fileList: [],
-      successUploadImageUrls: [],
-      uploaderVisible: false,
-      previewVisible: false,
-      previewImage: '',
-    };
+    this.state = initialState;
   }
 
   handleCancel = () => this.setState({ previewVisible: false });
@@ -48,12 +50,10 @@ class EventEditor extends React.Component {
     this.setState({ fileList: info.fileList });
   };
 
-  handleSubmit = (
-    values,
-    { setSubmitting, setErrors, setStatus, resetForm },
-  ) => {
+  handleSubmit = (values, { resetForm }) => {
     const { registerEvent, isMyProfile } = this.props;
     const { fileList } = this.state;
+    const { clearImageUploader } = this;
 
     const sucessUploadImageUrls = fileList
       .filter(item => item.status === 'done')
@@ -70,7 +70,10 @@ class EventEditor extends React.Component {
         ...values,
         files: sucessUploadImageUrls,
       },
-      resetForm,
+      resetForm: () => {
+        clearImageUploader();
+        resetForm();
+      },
       isMyProfile,
     });
   };
@@ -82,6 +85,12 @@ class EventEditor extends React.Component {
     });
   };
 
+  clearImageUploader = () => {
+    this.setState({
+      ...initialState
+    });
+  };
+
   render() {
     const uploadProps = createUploadOptions({
       handleChange: this.handleChange,
@@ -90,7 +99,6 @@ class EventEditor extends React.Component {
       operationIds: ['250x150'],
       fileList: this.state.fileList,
     });
-    console.log('uploadProps:', uploadProps);
 
     return (
       <EventEditorComponent
