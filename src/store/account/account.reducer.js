@@ -3,7 +3,7 @@ import { AccountActionTypes } from './account.action';
 
 export const initialState = {
   isLoggedIn: !refreshTokenExpired(),
-  isCheckDuplicate: false, // 아이디가 중복인지 확인함.
+  isCheckDuplicate: false,
   userInfo: {
     email: '',
   },
@@ -20,6 +20,7 @@ const accountReducer = (state = initialState, action) => {
     case AccountActionTypes.LOGOUT.SUCCESS:
       return {
         ...initialState,
+        isLoggedIn: false,
       };
     case AccountActionTypes.REGISTER.SUCCESS:
       return {
