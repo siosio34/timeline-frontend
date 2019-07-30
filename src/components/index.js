@@ -1,5 +1,3 @@
-export { default as CustomButton } from './customButton';
-export { default as CustomInput } from './customInput';
 export { default as EventEditor } from './eventEditor';
 export { default as EventList } from './eventList';
 export { default as FriendsList } from './friendsList';
