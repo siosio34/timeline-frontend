@@ -6,6 +6,7 @@ import {
 
 export const FriendActionTypes = {
   GET_FRIENDS: makeAsyncActionTypes('GET_FRIENDS'),
+  DELETE_FRIEND: makeAsyncActionTypes('DELETE_FRIEND'),
   GET_RECOMMEND_FRIENDS: makeAsyncActionTypes('GET_RECOMMEND_FRIENDS'),
   GET_REQUESTS_FRIENDS: makeAsyncActionTypes('GET_REQUESTS_FRIENDS'),
   CREATE_REQUEST_FRIEND: makeAsyncActionTypes('CREATE_REQUEST_FRIEND'),
@@ -18,6 +19,7 @@ export const FriendActionTypes = {
 
 export const FriendActionCreators = {
   getFriends: makeAsyncActionCreator(FriendActionTypes.GET_FRIENDS),
+  deleteFriend: makeAsyncActionCreator(FriendActionTypes.DELETE_FRIEND),
   getRecommendFriends: makeAsyncActionCreator(
     FriendActionTypes.GET_RECOMMEND_FRIENDS,
   ),

@@ -4,6 +4,10 @@ const getFriends = () => {
   return RequestApi.get('/friends');
 };
 
+const deleteFriend = requestEmail => {
+  return RequestApi.delete(`/friends/${requestEmail}`);
+};
+
 const getRecommendFriends = () => {
   return RequestApi.get('/friends/recommend');
 };
@@ -38,6 +42,7 @@ const denyFriendRequest = requestEmail => {
 
 export default {
   getFriends,
+  deleteFriend,
   getRecommendFriends,
   getFriendsRequest,
   createFriendsRequest,

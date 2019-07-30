@@ -15,6 +15,26 @@ export function* getFriends() {
   }
 }
 
+export function* deleteFriend(action) {
+  try {
+    const confirmed = yield call(confirmSaga, {
+      title: '친구삭제',
+      content: `${action.payload.username}님을 친구목록에서 삭제하시겠습니까?`,
+    });
+
+    if (!confirmed) {
+      return;
+    }
+
+    yield put(FriendActionCreators.deleteFriend.request());
+    yield call(FriendApi.deleteFriend, action.payload.email);
+    yield put(FriendActionCreators.deleteFriend.success());
+    yield put(FriendActionCreators.getFriends());
+  } catch (error) {
+    yield put(FriendActionCreators.deleteFriend.failure(error));
+  }
+}
+
 export function* getFriendsReceive() {
   try {
     yield put(FriendActionCreators.getFriendsReceive.request());
@@ -106,6 +126,7 @@ export function* denyFriendRequest(action) {
 
 export const friendSagas = [
   takeLatest(FriendActionTypes.GET_FRIENDS.INDEX, getFriends),
+  takeLatest(FriendActionTypes.DELETE_FRIEND.INDEX, deleteFriend),
   takeLatest(
     FriendActionTypes.GET_RECOMMEND_FRIENDS.INDEX,
     getRecommendFriends,
