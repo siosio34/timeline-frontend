@@ -51,7 +51,7 @@ class ProfilePage extends Component {
           )}
         </Sider>
         <Content style={{ paddingLeft: '30px' }}>
-          <EventEditor />
+          <EventEditor isMyProfile={true} />
           <EventList events={events} loading={timelineLoading} />
         </Content>
       </Layout>

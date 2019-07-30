@@ -52,7 +52,7 @@ class EventEditor extends React.Component {
     values,
     { setSubmitting, setErrors, setStatus, resetForm },
   ) => {
-    const { registerEvent } = this.props;
+    const { registerEvent, isMyProfile } = this.props;
     const { fileList } = this.state;
 
     const sucessUploadImageUrls = fileList
@@ -71,6 +71,7 @@ class EventEditor extends React.Component {
         files: sucessUploadImageUrls,
       },
       resetForm,
+      isMyProfile,
     });
   };
 
@@ -113,9 +114,14 @@ class EventEditor extends React.Component {
   }
 }
 
+EventEditor.defaultProps = {
+  isMyProfile: false,
+};
+
 EventEditor.propTypes = {
   registerEvent: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  isMyProfile: PropTypes.bool,
 };
 
 const eventRegisterLoadingSelector = createLoadingSelector([
