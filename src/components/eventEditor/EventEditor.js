@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
-
-import { Button, message, Upload, Modal, Icon } from 'antd';
-import { Input, FormItem, Form } from '@jbuschke/formik-antd';
-
-import { EventActionCreators } from 'store/event/event.action';
+import { message } from 'antd';
+import createLoadingSelector from 'utils/createLoadingSelector';
+import { EventActionTypes, EventActionCreators } from 'store/event/event.action';
+import EventEditorComponent from './EventEditorComponent';
 import './EventEditor.css';
-
-const { TextArea } = Input;
-
-const InitialValue = {
-  content: '',
-};
 
 const getBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -28,11 +20,11 @@ class EventEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUploaderVisible: false,
       fileList: [],
+      successUploadImageUrls: [],
+      uploaderVisible: false,
       previewVisible: false,
       previewImage: '',
-      successUploadImageUrls: [],
     };
   }
 
@@ -73,96 +65,53 @@ class EventEditor extends React.Component {
     this.setState({ fileList: info.fileList });
   };
 
-  render() {
-    const {
-      previewVisible,
-      previewImage,
-      fileList,
-      imageUploaderVisible,
-      successUploadImageUrls,
-    } = this.state;
-
+  handleSubmit = (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
     const { registerEvent } = this.props;
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
+    const { successUploadImageUrls } = this.state;
+    registerEvent({
+      eventData: {
+        ...values, files: successUploadImageUrls
+      },
+      resetForm,
+    });
+  };
+
+  toggleUploader = () => {
+    const { uploaderVisible } = this.state;
+    this.setState({
+      uploaderVisible: !uploaderVisible,
+    })
+  };
+
+  render() {
     return (
-      <div className="event-editor">
-        <Formik
-          initialValues={InitialValue}
-          onSubmit={values => {
-            registerEvent({ ...values, files: successUploadImageUrls });
-          }}
-          render={() => (
-            <Form>
-              <FormItem name="content">
-                <TextArea
-                  name="content"
-                  className="editor-textarea"
-                  style={{ resize: 'none' }}
-                  rows={3}
-                  placeholder="지금 떠오르는 생각을 친구들에게 공유해보세요."
-                  autosize
-                />
-              </FormItem>
-              <div className="editor-button-area">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="editor-button"
-                >
-                  저장
-                </Button>
-                <Button
-                  type="primary"
-                  className="editor-button"
-                  onClick={() =>
-                    this.setState({
-                      imageUploaderVisible: !imageUploaderVisible,
-                    })
-                  }
-                >
-                  사진
-                </Button>
-              </div>
-            </Form>
-          )}
-        />
-        {imageUploaderVisible && (
-          <div className="clearfix">
-            <Upload
-              multiple
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture-card"
-              fileList={fileList}
-              onPreview={this.handlePreview}
-              onChange={this.handleChange}
-            >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-            <Modal
-              visible={previewVisible}
-              footer={null}
-              onCancel={this.handleCancel}
-            >
-              <img alt="example" style={{ width: '100%' }} src={previewImage} />
-            </Modal>
-          </div>
-        )}
-      </div>
+      <EventEditorComponent
+        handleSubmit={this.handleSubmit}
+        handlePreview={this.handlePreview}
+        handleChange={this.handleChange}
+        handleCancel={this.handleCancel}
+        toggleUploader={this.toggleUploader}
+        uploaderVisible={this.state.uploaderVisible}
+        previewVisible={this.state.previewVisible}
+        previewImage={this.state.previewImage}
+        loading={this.props.loading}
+        fileList={this.state.fileList}
+      />
     );
   }
 }
 
 EventEditor.propTypes = {
   registerEvent: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
+const eventRegisterLoadingSelector = createLoadingSelector([
+  EventActionTypes.EVENT_REGISTER.BASE,
+]);
+
 const mapStateToProps = state => ({
-  // loading: signinLoadingSelector(state),
+  loading: eventRegisterLoadingSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
