@@ -8,10 +8,6 @@ const errorReducer = (state = {}, action) => {
 
   const [, requestName, requestState] = matches;
 
-  if (requestState === 'FAILURE') {
-    message.error(payload.message);
-  }
-
   return {
     ...state,
     [requestName]: requestState === 'FAILURE' ? payload.message : '',
