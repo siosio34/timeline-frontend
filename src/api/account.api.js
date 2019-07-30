@@ -5,7 +5,13 @@ const login = loginAccountData => {
 };
 
 const register = registerAccountData => {
-  return RequestApi.post('/accounts/register', { ...registerAccountData });
+  return RequestApi.post('/accounts/register', {
+    ...registerAccountData,
+    profileImage: {
+      thumbUrl: '',
+      url: '',
+    },
+  });
 };
 
 const refreshToken = token => {
