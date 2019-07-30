@@ -1,5 +1,3 @@
-import { message } from 'antd';
-
 const errorReducer = (state = {}, action) => {
   const { type, payload } = action;
   const matches = /(.*)_(REQUEST|FAILURE)/.exec(type);
