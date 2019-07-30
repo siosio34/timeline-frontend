@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { message } from 'antd';
 import createLoadingSelector from 'utils/createLoadingSelector';
-import { EventActionTypes, EventActionCreators } from 'store/event/event.action';
+import {
+  EventActionTypes,
+  EventActionCreators,
+} from 'store/event/event.action';
 import EventEditorComponent from './EventEditorComponent';
 import './EventEditor.css';
+import axios from 'axios';
 
 const getBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -42,35 +45,30 @@ class EventEditor extends React.Component {
   };
 
   handleChange = info => {
-    const { status, response } = info.file;
-    const { successUploadImageUrls } = this.state;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      const newSuccessUploadImageUrls = successUploadImageUrls.concat({
-        url: response.url,
-        thumbUrl: response.thumbUrl,
-      });
-
-      this.setState({ successUploadImageUrls: newSuccessUploadImageUrls });
-      message.success(`${info.file.name} file uploaded successfully.`);
-      // 여기서 완료된거만 url로 모아놔야한다.
-      // 그
-      // this.setState({ fileList });
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-
     this.setState({ fileList: info.fileList });
   };
 
-  handleSubmit = (values, {setSubmitting, setErrors, setStatus, resetForm}) => {
+  handleSubmit = (
+    values,
+    { setSubmitting, setErrors, setStatus, resetForm },
+  ) => {
     const { registerEvent } = this.props;
-    const { successUploadImageUrls } = this.state;
+    const { fileList } = this.state;
+
+    const sucessUploadImageUrls = fileList
+      .filter(item => item.status === 'done')
+      .map(file => ({
+        url: file.response.successes[0].url,
+        thumbUrl: file.response.successes[0].queues[0].url,
+      }));
+
+    const isSuccessUploadAllImages =
+      fileList.length === sucessUploadImageUrls.length;
+
     registerEvent({
       eventData: {
-        ...values, files: successUploadImageUrls
+        ...values,
+        files: sucessUploadImageUrls,
       },
       resetForm,
     });
@@ -80,10 +78,65 @@ class EventEditor extends React.Component {
     const { uploaderVisible } = this.state;
     this.setState({
       uploaderVisible: !uploaderVisible,
-    })
+    });
   };
 
   render() {
+    const {
+      previewVisible,
+      previewImage,
+      fileList,
+      uploaderVisible,
+    } = this.state;
+
+    const { registerEvent } = this.props;
+
+    const uploadProps = {
+      multiple: true,
+      listType: 'picture-card',
+      action:
+        'https://api-image.cloud.toast.com/image/v2.0/appkeys/nyXWlYDoYYEf6s19/images',
+      onPreview: this.handlePreview,
+      onChange: this.handleChange,
+      headers: {
+        Authorization: 'bMjzQRvR',
+        'Content-type': '',
+      },
+      file: fileList,
+      customRequest({
+        action,
+        data,
+        filename,
+        file,
+        headers,
+        onError,
+        onProgress,
+        onSuccess,
+        withCredentials,
+      }) {
+        const formData = new FormData();
+        formData.append('files', file);
+        formData.append(
+          'params',
+          JSON.stringify({
+            basepath: '/images/event',
+            autorename: true,
+            operationIds: ['250x150'],
+          }),
+        );
+        axios
+          .post(action, formData, {
+            headers,
+          })
+          .then(({ data: response }) => {
+            if (response.header.isSuccessful) {
+              onSuccess(response, file);
+            }
+          })
+          .catch(onError);
+      },
+    };
+
     return (
       <EventEditorComponent
         handleSubmit={this.handleSubmit}
@@ -96,6 +149,7 @@ class EventEditor extends React.Component {
         previewImage={this.state.previewImage}
         loading={this.props.loading}
         fileList={this.state.fileList}
+        uploadProps={uploadProps}
       />
     );
   }

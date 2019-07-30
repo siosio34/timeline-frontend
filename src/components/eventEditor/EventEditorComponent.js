@@ -6,8 +6,7 @@ import * as Yup from 'yup';
 import EventEditorForm from './eventEditorForm';
 
 const RegisterSchema = Yup.object().shape({
-  content: Yup.string()
-    .required('내용을 입력해주세요.'),
+  content: Yup.string().required('내용을 입력해주세요.'),
 });
 
 const uploadButton = (
@@ -21,14 +20,13 @@ const EventEditorComponent = props => {
   const {
     toggleUploader,
     handleSubmit,
-    handlePreview,
-    handleChange,
     handleCancel,
     uploaderVisible,
     previewVisible,
     previewImage,
     fileList,
-    loading
+    loading,
+    uploadProps,
   } = props;
 
   return (
@@ -40,29 +38,15 @@ const EventEditorComponent = props => {
         validationSchema={RegisterSchema}
         onSubmit={handleSubmit}
         render={() => (
-          <EventEditorForm
-            toggleUploader={toggleUploader}
-            loading={loading}
-          />
+          <EventEditorForm toggleUploader={toggleUploader} loading={loading} />
         )}
       />
       {uploaderVisible && (
         <div className="clearfix">
-          <Upload
-            multiple
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={handlePreview}
-            onChange={handleChange}
-          >
+          <Upload {...uploadProps}>
             {fileList.length >= 8 ? null : uploadButton}
           </Upload>
-          <Modal
-            visible={previewVisible}
-            footer={null}
-            onCancel={handleCancel}
-          >
+          <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
             <img alt="example" style={{ width: '100%' }} src={previewImage} />
           </Modal>
         </div>
