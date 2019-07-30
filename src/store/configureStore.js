@@ -13,6 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['auth'],
 };
 
 export default (initialState, history) => {
