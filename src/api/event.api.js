@@ -5,7 +5,7 @@ const register = registerEventData => {
 };
 
 const deleteEvent = eventId => {
-  return RequestApi.delete(`/event/${eventId}`);
+  return RequestApi.delete(`/events/${eventId}`);
 };
 
 export default {
