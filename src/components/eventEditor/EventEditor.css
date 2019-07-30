@@ -6,6 +6,12 @@
   line-height: initial;
 }
 
+.event-editor .ant-btn-background-ghost.ant-btn-primary,
+.event-editor .ant-btn-background-ghost.ant-btn-primary:hover,
+.event-editor .ant-btn-background-ghost.ant-btn-primary:focus {
+  color: #03cf5d;
+}
+
 .event-editor .ant-form-item {
   margin-bottom: initial;
 }
