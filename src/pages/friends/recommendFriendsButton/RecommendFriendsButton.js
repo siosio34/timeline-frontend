@@ -25,13 +25,13 @@ RecommendFriendsButton.propTypes = {
   createFriendsRequest: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = () => ({});
+const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({
   createFriendsRequest: friendInfo => e =>
     dispatch(FriendActionCreators.createFriendsRequest(friendInfo)),
 });
 
 export default connect(
-  mapStatetoProps,
+  mapStateToProps,
   mapDispatchToProps,
 )(RecommendFriendsButton);

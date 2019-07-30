@@ -6,3 +6,7 @@
 .friends-list-col {
   padding: 15px;
 }
+
+.friends-page .ant-tabs-bar {
+  margin: 0 0 -16px 0;
+}
