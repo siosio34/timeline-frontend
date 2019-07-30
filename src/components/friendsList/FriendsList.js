@@ -44,7 +44,7 @@ FriendsList.defaultProps = {
 
 FriendsList.propTypes = {
   friends: PropTypes.array,
-  FriendsButton: PropTypes.func.isRequired,
+  FriendsButton: PropTypes.object.isRequired,
 };
 
 export default FriendsList;
