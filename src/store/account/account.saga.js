@@ -15,9 +15,7 @@ export function* login(action) {
     yield put(push('/'));
     yield put(
       AccountActionCreators.login.success({
-        userInfo: {
-          email: action.payload.email,
-        },
+        email: action.payload.email,
       }),
     );
   } catch (error) {
@@ -43,7 +41,9 @@ export function* register(action) {
     window.localStorage.setItem('access_token', access_token);
     window.localStorage.setItem('refresh_token', refresh_token);
     yield put(push('/'));
-    yield put(AccountActionCreators.register.success({ response }));
+    yield put(
+      AccountActionCreators.register.success({ email: action.payload.email }),
+    );
   } catch (error) {
     yield put(AccountActionCreators.register.failure(error));
   }

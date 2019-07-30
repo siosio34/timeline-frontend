@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 import { EventEditor, EventList } from 'components';
-import { TimelineActionTypes, TimelineActionCreators } from 'store/timeline/timeline.action';
+import {
+  TimelineActionTypes,
+  TimelineActionCreators,
+} from 'store/timeline/timeline.action';
 import { ProfileActionCreators } from 'store/profile/profile.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
 import MyProfile from './myProfile';
@@ -16,7 +19,7 @@ class ProfilePage extends Component {
     super(props);
     this.state = {
       profileEditMode: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -41,11 +44,13 @@ class ProfilePage extends Component {
     return (
       <Layout style={{ background: 'none' }}>
         <Sider style={{ background: 'none' }}>
-          {profileEditMode ?
-            <MyProfileEdit toggle={toggleEditMode} profile={myProfile} /> :
-            <MyProfile toggle={toggleEditMode} profile={myProfile} />}
+          {profileEditMode ? (
+            <MyProfileEdit toggle={toggleEditMode} profile={myProfile} />
+          ) : (
+            <MyProfile toggle={toggleEditMode} profile={myProfile} />
+          )}
         </Sider>
-        <Content style={{ paddingLeft: '30px'}}>
+        <Content style={{ paddingLeft: '30px' }}>
           <EventEditor />
           <EventList events={events} loading={timelineLoading} />
         </Content>
@@ -68,18 +73,19 @@ const timelineLoadingSelector = createLoadingSelector([
 ]);
 
 const mapStateToProps = state => ({
-  userEmail: state.account.userInfo.email,
+  userEmail: state.account.email,
   events: state.timeline.events,
   myProfile: state.profile.myProfile,
   timelineLoading: timelineLoadingSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUserTimeline: userEmail => dispatch(TimelineActionCreators.getUserTimeline(userEmail)),
+  getUserTimeline: userEmail =>
+    dispatch(TimelineActionCreators.getUserTimeline(userEmail)),
   getMyProfile: () => dispatch(ProfileActionCreators.getMyProfile()),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ProfilePage);
