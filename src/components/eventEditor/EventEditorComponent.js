@@ -66,6 +66,7 @@ EventEditorComponent.propTypes = {
   previewVisible: PropTypes.bool.isRequired,
   previewImage: PropTypes.string.isRequired,
   fileList: PropTypes.array.isRequired,
+  uploadProps: PropTypes.object.isRequired,
 };
 
 export default EventEditorComponent;
