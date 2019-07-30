@@ -1,16 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ModalActionCreators } from 'store/modal/modal.action';
-import { Modal } from 'antd';
+import { Modal, Icon } from 'antd';
 import PropTypes from 'prop-types';
 
 const AppModal = ({ title, content, isShow, confirmOk, confirmCancel }) => {
   return (
     <Modal
-      title={title}
+      title={
+        <div>
+          <Icon type="question-circle" theme="twoTone" twoToneColor="#03cf5d" style={{ marginRight: '8px' }} />
+          {title}
+        </div>
+      }
       visible={isShow}
       onOk={confirmOk}
       onCancel={confirmCancel}
+      okText="네"
+      cancelText="아니오"
     >
       {content}
     </Modal>
