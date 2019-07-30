@@ -1,0 +1,45 @@
+.intro-page {
+  height: 500px;
+}
+
+.intro-title {
+  margin-top: 100px;
+}
+
+.intro-app-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 70px;
+}
+
+.intro-app-title > strong {
+  color: #03cf5d;
+  font-weight: 700;
+}
+
+.intro-description {
+  font-size: 25px;
+  height: 100%;
+  padding: 30px;
+}
+
+.intro-description strong {
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+.intro-kor {
+  font-weight: 300;
+  letter-spacing: -1px;
+  padding-left: 20px;
+}
+
+.intro-eng {
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+  letter-spacing: 0.5px;
+  text-align: right;
+  font-weight: 200;
+  text-transform: uppercase;
+}
