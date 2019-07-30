@@ -35,13 +35,12 @@ class MyFriendsList extends Component {
 }
 
 MyFriendsList.defaultProps = {
-  friends: [],
+  searchedMyFriends: [],
 };
 
 MyFriendsList.propTypes = {
   getFriends: PropTypes.func.isRequired,
   handleFriendSearchInputChange: PropTypes.func.isRequired,
-  friends: PropTypes.array,
   searchedMyFriends: PropTypes.array,
 };
 

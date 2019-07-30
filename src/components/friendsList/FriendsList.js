@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Avatar } from 'antd/lib/index';
+import { List, Avatar } from 'antd';
+import FriendsEmpty from './friendsEmpty';
 import './FriendsList.css';
 
 const FriendsList = ({ friends, FriendsButton }) => {
+  if (!friends.length) {
+    return <FriendsEmpty />;
+  }
+
   return (
     <div className="friends-list">
       <List

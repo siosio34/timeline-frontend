@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FriendsList, MyFriendsList } from 'components';
-import { Tabs, Icon } from 'antd';
 import {
-  FriendActionTypes,
   FriendActionCreators,
 } from 'store/friends/friend.action';
-import FriendSelector from 'store/friends/friend.select';
 
-import ReceiveFriendButton from './receiveFriendsButton';
-import RequestFriendsButton from './requestFriendsButton';
-import RecommendFriendsButton from './recommendFriendsButton';
+import FriendsPageComponent from './FriendsPageComponent';
 import './FriendsPage.css';
-
-const { TabPane } = Tabs;
 
 class FriendsPage extends Component {
   componentDidMount() {
@@ -30,74 +22,8 @@ class FriendsPage extends Component {
   }
 
   render() {
-    const {
-      friendRequestsReceive,
-      friendRequestsSend,
-      recommendFriends,
-    } = this.props;
-
     return (
-      <div className="friends-page ant-row">
-        <div className="ant-col ant-col-12">
-          <h2>대기중인 친구신청</h2>
-          <Tabs>
-            <TabPane
-              tab={
-                <span>
-                  <Icon type="user-add" />
-                  받은 신청
-                </span>
-              }
-              key="1"
-            >
-              <div className="friends-list-col">
-                <FriendsList
-                  friends={friendRequestsReceive}
-                  FriendsButton={ReceiveFriendButton}
-                />
-              </div>
-            </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <Icon type="user" />
-                  보낸 신청
-                </span>
-              }
-              key="2"
-            >
-              <div className="friends-list-col">
-                <FriendsList
-                  friends={friendRequestsSend}
-                  FriendsButton={RequestFriendsButton}
-                />
-              </div>
-            </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <Icon type="user" />
-                  추천 친구
-                </span>
-              }
-              key="3"
-            >
-              <div className="friends-list-col">
-                <FriendsList
-                  friends={recommendFriends}
-                  FriendsButton={RecommendFriendsButton}
-                />
-              </div>
-            </TabPane>
-          </Tabs>
-        </div>
-        <div className="ant-col ant-col-12">
-          <h2>내 친구 목록</h2>
-          <div className="friends-list-col">
-            <MyFriendsList />
-          </div>
-        </div>
-      </div>
+      <FriendsPageComponent {...this.props} />
     );
   }
 }
@@ -112,7 +38,7 @@ FriendsPage.propTypes = {
   getRecommendFriends: PropTypes.func.isRequired,
 };
 
-const mapStatetoProps = state => ({
+const mapStateToProps = state => ({
   friendRequestsReceive: state.friend.friendRequestsReceive,
   friendRequestsSend: state.friend.friendRequestsSend,
   recommendFriends: state.friend.recommendFriends,
@@ -127,6 +53,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStatetoProps,
+  mapStateToProps,
   mapDispatchToProps,
 )(FriendsPage);
