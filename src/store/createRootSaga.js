@@ -11,6 +11,6 @@ export default function* rootSaga() {
     ...eventSagas,
     ...friendSagas,
     ...profileSagas,
-    ...timelineSagas
+    ...timelineSagas,
   ]);
 }

@@ -7,6 +7,7 @@ import friendReducer from './friends/friend.reducer';
 import loadingReducer from './loading/loading.reducer';
 import profileReducer from './profile/profile.reducer';
 import timelineReducer from './timeline/timeline.reducer';
+import modalReducer from './modal/modal.reducer';
 
 const createRootReducer = history =>
   combineReducers({
@@ -16,6 +17,7 @@ const createRootReducer = history =>
     loading: loadingReducer,
     profile: profileReducer,
     timeline: timelineReducer,
+    modal: modalReducer,
     router: connectRouter(history),
   });
 

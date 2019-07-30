@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { FriendApi } from 'api';
+import confirmSaga from 'store/modal/modal.saga';
 import { FriendActionTypes, FriendActionCreators } from './friend.action';
 
 export function* getFriends() {
@@ -59,6 +60,15 @@ export function* createFriendsRequest(action) {
 
 export function* cancelFriendsRequest(action) {
   try {
+    const confirmed = yield call(confirmSaga, {
+      title: '친구신청삭제',
+      content: '해당 신청을 정말로 삭제하시겠습니까?',
+    });
+
+    if (!confirmed) {
+      return;
+    }
+
     const { email } = action.payload;
     yield put(FriendActionCreators.cancelFriendsRequest.request());
     const response = yield call(FriendApi.cancelFriendsRequest, email);
