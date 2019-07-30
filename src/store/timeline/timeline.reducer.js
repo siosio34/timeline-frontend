@@ -19,7 +19,7 @@ const timelineReducer = (state = initialState, action) => {
     case TimelineActionTypes.GET_TIMELINE.SUCCESS:
       return {
         ...state,
-        events: action.payload.response.events,
+        events: action.payload.response.events || [],
       };
 
     case TimelineActionTypes.GET_USER_TIMELINE.INDEX:
@@ -33,15 +33,15 @@ const timelineReducer = (state = initialState, action) => {
     case TimelineActionTypes.GET_USER_TIMELINE.SUCCESS:
       return {
         ...state,
-        events: action.payload.response.events,
+        events: action.payload.response.events || [],
       };
 
     case TimelineActionTypes.GET_ADD_TIMELINE.SUCCESS:
       return {
         ...state,
         page: state.page + 1,
-        events: state.events.concat(action.payload.response.events),
-        newEvents: action.payload.response.events,
+        events: state.events.concat(action.payload.response.events || []),
+        newEvents: action.payload.response.events || [],
       };
 
     default:
