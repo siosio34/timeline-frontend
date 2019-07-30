@@ -1,5 +1,4 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import { message } from 'antd';
 
 import { EventApi } from 'api';
 import { TimelineActionCreators } from 'store/timeline/timeline.action';
@@ -10,10 +9,9 @@ export function* registerEvent(action) {
   try {
     yield put(EventActionCreators.registerEvent.request());
     const response = yield call(EventApi.register, action.payload);
-    const userId = yield select(state => state.account.userInfo.email);
+    const userId = yield select(state => state.account.email);
     yield put(TimelineActionCreators.getTimeline({}));
     yield put(TimelineActionCreators.getUserTimeline({ email: userId }));
-    message.success('성공적으로 저장되었습니다.', 1.5);
   } catch (error) {
     yield put(EventActionCreators.registerEvent.failure({ error }));
   }
@@ -32,7 +30,6 @@ export function* deleteEvent(action) {
 
     yield put(EventActionCreators.deleteEvent.request());
     yield call(EventApi.deleteEvent, action.payload);
-    message.success('포스트가 삭제되었습니다.', 1.5);
   } catch (error) {
     yield put(EventActionCreators.deleteEvent.failure({ error }));
   }

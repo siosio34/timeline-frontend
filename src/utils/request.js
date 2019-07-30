@@ -30,7 +30,12 @@ RequestApi.interceptors.request.use(
 const NOT_AUTHORIZED_HTTP_CODE = 401;
 
 RequestApi.interceptors.response.use(
-  response => response.data,
+  response => {
+    if (response && response.config.method !== 'get') {
+      message.success('요청이 성공적으로 처리되었습니다.', 1.5);
+    }
+    return response.data;
+  },
   error => {
     const { config, response } = error;
     const originalRequest = config;
@@ -62,7 +67,7 @@ RequestApi.interceptors.response.use(
         });
     }
 
-    message.error('요청이 실패하였습니다.');
+    message.error('요청이 실패하였습니다.', 1.5);
     return Promise.reject(error);
   },
 );

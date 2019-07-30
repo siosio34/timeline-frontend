@@ -7,11 +7,24 @@ import { EventActionCreators } from 'store/event/event.action';
 import './EventCard.css';
 
 const EventCard = ({ event, userEmail, deleteEvent }) => {
-  const { id, authorUsername, authorEmail, content, createTime, updateTime, thumbnail } = event;
+  const {
+    id,
+    authorUsername,
+    authorEmail,
+    content,
+    createTime,
+    updateTime,
+    thumbnail,
+  } = event;
   return (
     <div className="timeline-item">
       <div className="timeline-item-info">
-        <Avatar size="" alt="user thumbnail" src={thumbnail} icon={!thumbnail && 'user'} />
+        <Avatar
+          size=""
+          alt="user thumbnail"
+          src={thumbnail}
+          icon={!thumbnail && 'user'}
+        />
         <div className="meta-section">
           <div className="author-name">{authorUsername}</div>
           <div className="timeline-item-datetime">
@@ -46,7 +59,7 @@ EventCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userEmail: state.account.userInfo.email,
+  userEmail: state.account.email,
 });
 
 const mapDispatchToProps = dispatch => ({

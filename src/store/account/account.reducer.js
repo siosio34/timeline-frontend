@@ -4,9 +4,7 @@ import { AccountActionTypes } from './account.action';
 export const initialState = {
   isLoggedIn: !refreshTokenExpired(),
   isCheckDuplicate: false,
-  userInfo: {
-    email: '',
-  },
+  email: '',
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -15,7 +13,7 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        userInfo: action.payload.userInfo,
+        email: action.payload.email,
       };
     case AccountActionTypes.LOGOUT.SUCCESS:
       return {
@@ -26,6 +24,7 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        email: action.payload.email,
       };
     case AccountActionTypes.CHECK_DUPLICATE_EMAIL.SUCCESS:
       return {
