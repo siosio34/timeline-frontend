@@ -40,6 +40,21 @@ $ npm run build
 * 프로필 수정, 프로필 이미지 업로드
 * 친구 목록, 추천 친구, 친구 요청 및 거절, 친구 삭제
 
+### 로그인
+![image](https://user-images.githubusercontent.com/42922453/62202242-e7c5b800-b3c3-11e9-9333-7004e03240be.png)
+
+### 회원가입
+![image](https://user-images.githubusercontent.com/42922453/62202290-ff9d3c00-b3c3-11e9-933c-14bd143fec3b.png)
+
+### 타임라인
+![image](https://user-images.githubusercontent.com/42922453/62202350-1774c000-b3c4-11e9-92fe-8425e6396c3d.png)
+
+### 내 프로필
+![image](https://user-images.githubusercontent.com/42922453/62202384-29566300-b3c4-11e9-9262-f874e4aaca3d.png)
+
+### 친구 목록
+![image](https://user-images.githubusercontent.com/42922453/62202433-3f642380-b3c4-11e9-85ee-bce6252d3cdc.png)
+
 ## Used Open source
 프로젝트에 사용된 오픈소스 라이브러리는 아래와 같습니다.
 
