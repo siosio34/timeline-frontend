@@ -6,6 +6,7 @@ import {
   TimelineActionCreators,
   TimelineActionTypes,
 } from 'store/timeline/timeline.action';
+import { ProfileActionCreators } from 'store/profile/profile.action';
 import createLoadingSelector from 'utils/createLoadingSelector';
 
 import { Spin } from 'antd';
@@ -19,22 +20,19 @@ class TimelinePage extends React.Component {
   }
 
   componentDidMount() {
-    const { getTimeline } = this.props;
+    const { getTimeline, getMyProfile } = this.props;
     getTimeline({ page: 0 });
+    getMyProfile();
   }
 
   handleScroll = e => {
     const bottom =
       e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    console.log('this.props', this.props.isExistTimeline);
     if (bottom && this.props.isExistTimeline) {
-      console.log('dadadad');
       // 여기서 바닥찍는 액션 호출
       this.props.getAddTimeline();
     }
   };
-
-  // Binds our scroll event handler
 
   render() {
     const { events, timelineLoading } = this.props;
@@ -65,6 +63,7 @@ class TimelinePage extends React.Component {
 
 TimelinePage.propTypes = {
   getTimeline: PropTypes.func.isRequired,
+  getMyProfile: PropTypes.func.isRequired,
   events: PropTypes.array.isRequired,
   timelineLoading: PropTypes.bool.isRequired,
 };
@@ -82,6 +81,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getTimeline: payload => dispatch(TimelineActionCreators.getTimeline(payload)),
   getAddTimeline: () => dispatch(TimelineActionCreators.getAddTimeline()),
+  getMyProfile: () => dispatch(ProfileActionCreators.getMyProfile()),
 });
 
 export default connect(
