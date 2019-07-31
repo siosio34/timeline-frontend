@@ -1,0 +1,17 @@
+.card-image {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.card-image .image-gallery-right-nav::before,
+.card-image .image-gallery-left-nav::before {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 50px;
+}
+
+.timeline-item-image {
+  max-height: 300px;
+  width: 100%;
+  display: block;
+}
