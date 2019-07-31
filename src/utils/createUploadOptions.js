@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { message } from 'antd';
 
-const imageServerUrl = 'https://api-image.cloud.toast.com/image/v2.0/appkeys/nyXWlYDoYYEf6s19/images';
+const imageServerKey = process.env.REACT_APP_APP_KEY;
+const imageServerUrl = `https://api-image.cloud.toast.com/image/v2.0/appkeys/${imageServerKey}/images`;
 const createUploadOptions = ({ handlePreview, handleChange, basePath, operationIds, fileList }) => {
   return {
     action: imageServerUrl,
     onPreview: handlePreview,
     onChange: handleChange,
     headers: {
-      Authorization: 'bMjzQRvR',
+      Authorization: process.env.REACT_APP_AUTHORIZATION,
       'Content-type': '',
     },
     file: fileList,
