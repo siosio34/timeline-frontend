@@ -28,6 +28,7 @@ class MyFriendsList extends Component {
         <FriendsList
           friends={searchedMyFriends}
           FriendsButton={MyFriendsButton}
+          emptyMessage={<span>친구가 없습니다.<br />새로운 친구를 추가해보세요</span>}
         />
       </div>
     );
