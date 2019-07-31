@@ -1,70 +1,78 @@
 # timeline-frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 2019 NAVER D2 FEST mini 썸머 챌린지에 출품하기 위한 프로젝트입니다. 여러 주제 중, 타임라인 주제를 선정하여 진행되었습니다.
 
-## Available Scripts
+* **Backend repo** : https://github.com/Ryulth/timeline-backend
 
-In the project directory, you can run:
+### 참여한 사람
+* [김형률](https://github.com/Ryulth) : 백엔드 개발
+* [조영제](https://github.com/siosio34) : 프론트엔드 개발
+* [이소영](https://github.com/devSoyoung) : 프론트엔드 개발
 
-### `npm start`
+## Development Configuration
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> 이 프로젝트는 [Create React App](https://github.com/facebook/create-react-app)으로 만들어졌습니다.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Repository를 다운 받은 후, 해당 디렉토리에서 아래 명령어를 실행합니다.
 
-### `npm test`
+```
+$ npm install
+$ npm start
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+App이 `http://localhost:3000`에서 실행됩니다.
 
-### `npm run build`
+## Build
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ npm run build
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+위 명령어를 실행하면 `build` 폴더에 빌드 결과물이 저장됩니다. production mode로 번들하고 최적화하여 수행 성능이 개선됩니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 배포에 대한 추가적인 정보는 [여기](https://facebook.github.io/create-react-app/docs/deployment)를 확인해주세요.
 
-### `npm run eject`
+## Feature
+이 프로젝트는 기본적인 기능을 담은 타임라인 서비스를 구현하였습니다.
+* 회원가입, 로그인/로그아웃
+* 새 소식(=이벤트) 작성, 삭제, 이미지 첨부
+* 타임라인, 내 소식 목록
+* 프로필 수정, 프로필 이미지 업로드
+* 친구 목록, 추천 친구, 친구 요청 및 거절, 친구 삭제
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Used Open source
+프로젝트에 사용된 오픈소스 라이브러리는 아래와 같습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* [@jbuschke/formik-antd](https://www.npmjs.com/package/@jbuschke/formik-antd)
+* [antd](https://www.npmjs.com/package/antd)
+* [axios](https://www.npmjs.com/package/axios)
+* [babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)
+* [connected-react-router](https://www.npmjs.com/package/connected-react-router)
+* [customize-cra](https://www.npmjs.com/package/customize-cra)
+* [formik](https://www.npmjs.com/package/formik)
+* [history](https://www.npmjs.com/package/history)
+* [jwt-decode](https://www.npmjs.com/package/jwt-decode)
+* [less](https://www.npmjs.com/package/less)
+* [less-loader](https://www.npmjs.com/package/less-loader)
+* [lodash](https://www.npmjs.com/package/lodash)
+* [moment](https://www.npmjs.com/package/moment)
+* [prop-types](https://www.npmjs.com/package/prop-types)
+* [react](https://www.npmjs.com/package/react)
+* [react-app-rewired](https://www.npmjs.com/package/react-app-rewired)
+* [react-dom](https://www.npmjs.com/package/react-dom)
+* [react-helmet](https://www.npmjs.com/package/react-helmet)
+* [react-redux](https://www.npmjs.com/package/react-redux)
+* [react-router](https://www.npmjs.com/package/react-router)
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+* [react-scripts](https://www.npmjs.com/package/react-scripts)
+* [redux](https://www.npmjs.com/package/redux)
+* [redux-persist](https://www.npmjs.com/package/redux-persist)
+* [redux-saga](https://www.npmjs.com/package/redux-saga)
+* [reselect](https://www.npmjs.com/package/reselect)
+* [styled-components](https://www.npmjs.com/package/styled-components)
+* [yup](https://www.npmjs.com/package/yup)
+* [create-react-app](https://www.npmjs.com/package/create-react-app)
+* [react-image-gallay](https://github.com/xiaolin/react-image-galler)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License
+MIT License
