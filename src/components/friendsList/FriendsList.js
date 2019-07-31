@@ -12,6 +12,11 @@ const FriendsList = ({ friends, FriendsButton }) => {
   return (
     <div className="friends-list">
       <List
+        pagination={{
+          pageSize: 15,
+          size: 'small',
+          simple: 'true',
+        }}
         dataSource={friends}
         renderItem={friend => {
           const { username, school, id, state, profileImage } = friend;
