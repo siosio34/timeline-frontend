@@ -47,11 +47,3 @@
   text-align:justify;
   margin-bottom: 10px;
 }
-
-.timeline-item-image {
-  max-height: 300px;
-  width: 70%;
-  margin: auto;
-  display: block;
-  margin-bottom: 20px;
-}
