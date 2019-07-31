@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
 import { Icon, Button } from 'antd';
 import { Input, FormItem, Form } from '@jbuschke/formik-antd';
 
@@ -61,9 +58,6 @@ class LoginForm extends React.Component {
                   placeholder="비밀번호"
                 />
               </FormItem>
-              <Link className="login-form-forgot" to="/">
-                비밀번호 찾기
-              </Link>
               <Button
                 type="primary"
                 htmlType="submit"

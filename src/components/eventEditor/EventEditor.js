@@ -62,9 +62,6 @@ class EventEditor extends React.Component {
         thumbUrl: file.response.successes[0].queues[0].url,
       }));
 
-    const isSuccessUploadAllImages =
-      fileList.length === sucessUploadImageUrls.length;
-
     registerEvent({
       eventData: {
         ...values,

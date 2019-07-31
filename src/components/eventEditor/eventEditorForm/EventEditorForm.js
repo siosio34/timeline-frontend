@@ -30,7 +30,7 @@ const EventEditorForm = ({ toggleUploader, loading }) => {
         </Button>
         <Button
           type="primary"
-          className="editor-button"
+          className="editor-button photo"
           onClick={toggleUploader}
           ghost
         >
