@@ -10,17 +10,13 @@ const FriendsEmpty = ({ message }) => (
       imageStyle={{
         marginBottom: '20px',
       }}
-      description={message}
+      description={message || '새로운 요청이 없습니다.'}
     />
   </div>
 );
 
-FriendsEmpty.defaultProps = {
-  message: '새로운 요청이 없습니다.'
-};
-
 FriendsEmpty.propTypes = {
-  message: PropTypes.string,
+  message: PropTypes.string.isRequired,
 };
 
 export default FriendsEmpty;

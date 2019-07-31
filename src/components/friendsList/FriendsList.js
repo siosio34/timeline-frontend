@@ -4,19 +4,21 @@ import { List, Avatar } from 'antd';
 import FriendsEmpty from './friendsEmpty';
 import './FriendsList.css';
 
-const FriendsList = ({ friends, FriendsButton }) => {
+const paginationOption = {
+  pageSize: 15,
+  size: 'small',
+  simple: 'true',
+};
+
+const FriendsList = ({ friends, FriendsButton, emptyMessage }) => {
   if (!friends.length) {
-    return <FriendsEmpty />;
+    return <FriendsEmpty message={emptyMessage} />;
   }
 
   return (
     <div className="friends-list">
       <List
-        pagination={{
-          pageSize: 15,
-          size: 'small',
-          simple: 'true',
-        }}
+        pagination={paginationOption}
         dataSource={friends}
         renderItem={friend => {
           const { username, school, id, state, profileImage } = friend;
@@ -45,10 +47,12 @@ const FriendsList = ({ friends, FriendsButton }) => {
 
 FriendsList.defaultProps = {
   friends: [],
+  emptyMessage: '',
 };
 
 FriendsList.propTypes = {
   friends: PropTypes.array,
+  emptyMessage: PropTypes.string,
   FriendsButton: PropTypes.object.isRequired,
 };
 
