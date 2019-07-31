@@ -22,6 +22,9 @@ const FriendsPageComponent = (props) => {
     friendRequestsReceive,
     friendRequestsSend,
     recommendFriends,
+    friendRequestsReceiveLoading,
+    friendRequestsSendLoading,
+    recommendFriendsLoading,
   } = props;
 
   return (
@@ -34,6 +37,7 @@ const FriendsPageComponent = (props) => {
               <FriendsList
                 friends={friendRequestsReceive}
                 FriendsButton={ReceiveFriendButton}
+                loading={friendRequestsReceiveLoading}
               />
             </div>
           </TabPane>
@@ -42,6 +46,7 @@ const FriendsPageComponent = (props) => {
               <FriendsList
                 friends={friendRequestsSend}
                 FriendsButton={RequestFriendsButton}
+                loading={friendRequestsSendLoading}
               />
             </div>
           </TabPane>
@@ -50,6 +55,7 @@ const FriendsPageComponent = (props) => {
               <FriendsList
                 friends={recommendFriends}
                 FriendsButton={RecommendFriendsButton}
+                loading={recommendFriendsLoading}
               />
             </div>
           </TabPane>
@@ -74,6 +80,9 @@ FriendsPageComponent.propTypes = {
   friendRequestsReceive: PropTypes.array.isRequired,
   friendRequestsSend: PropTypes.array.isRequired,
   recommendFriends: PropTypes.array.isRequired,
+  friendRequestsReceiveLoading: PropTypes.bool.isRequired,
+  friendRequestsSendLoading: PropTypes.bool.isRequired,
+  recommendFriendsLoading: PropTypes.bool.isRequired,
 };
 
 export default FriendsPageComponent;

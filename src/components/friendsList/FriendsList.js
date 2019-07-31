@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Avatar } from 'antd';
 import FriendsEmpty from './friendsEmpty';
+import FriendsLoading from './friendsLoading';
 import './FriendsList.css';
 
 const paginationOption = {
@@ -10,11 +11,13 @@ const paginationOption = {
   simple: 'true',
 };
 
-const FriendsList = ({ friends, FriendsButton, emptyMessage }) => {
+const FriendsList = ({ friends, FriendsButton, emptyMessage, loading }) => {
+  if (loading) {
+    return <FriendsLoading />;
+  }
   if (!friends.length) {
     return <FriendsEmpty message={emptyMessage} />;
   }
-
   return (
     <div className="friends-list">
       <List
@@ -52,6 +55,7 @@ FriendsList.defaultProps = {
 
 FriendsList.propTypes = {
   friends: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
   emptyMessage: PropTypes.string,
   FriendsButton: PropTypes.object.isRequired,
 };

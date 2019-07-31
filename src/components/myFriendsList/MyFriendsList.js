@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input, Icon } from 'antd';
-import { FriendsList } from 'components';
-
-import { FriendActionCreators } from 'store/friends/friend.action';
+import createLoadingSelector from 'utils/createLoadingSelector';
 import FriendSelector from 'store/friends/friend.select';
+import { FriendActionTypes, FriendActionCreators } from 'store/friends/friend.action';
+import { FriendsList } from 'components';
 import MyFriendsButton from './myFriendsButton';
 
 const { Search } = Input;
@@ -17,7 +17,7 @@ class MyFriendsList extends Component {
   }
 
   render() {
-    const { searchedMyFriends, handleFriendSearchInputChange } = this.props;
+    const { searchedMyFriends, handleFriendSearchInputChange, friendsLoading } = this.props;
     return (
       <div style={{ paddingLeft: '20px' }}>
         <Search
@@ -27,8 +27,9 @@ class MyFriendsList extends Component {
         />
         <FriendsList
           friends={searchedMyFriends}
+          loading={friendsLoading}
           FriendsButton={MyFriendsButton}
-          emptyMessage={<span>친구가 없습니다.<br />새로운 친구를 추가해보세요</span>}
+          emptyMessage="아직 친구가 없습니다."
         />
       </div>
     );
@@ -41,12 +42,18 @@ MyFriendsList.defaultProps = {
 
 MyFriendsList.propTypes = {
   getFriends: PropTypes.func.isRequired,
+  friendsLoading: PropTypes.bool.isRequired,
   handleFriendSearchInputChange: PropTypes.func.isRequired,
   searchedMyFriends: PropTypes.array,
 };
 
+const friendsLoadingSelector = createLoadingSelector([
+  FriendActionTypes.GET_FRIENDS.BASE,
+]);
+
 const mapStateToProps = state => ({
   friends: state.friend.friends,
+  friendsLoading: friendsLoadingSelector(state),
   searchedMyFriends: FriendSelector.getSearchedFriends(state),
 });
 

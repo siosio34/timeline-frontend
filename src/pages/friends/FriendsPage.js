@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import createLoadingSelector from 'utils/createLoadingSelector';
 import {
-  FriendActionCreators,
+  FriendActionCreators, FriendActionTypes,
 } from 'store/friends/friend.action';
 
 import FriendsPageComponent from './FriendsPageComponent';
@@ -36,12 +37,31 @@ FriendsPage.propTypes = {
   getFriendsReceive: PropTypes.func.isRequired,
   getFriendsRequest: PropTypes.func.isRequired,
   getRecommendFriends: PropTypes.func.isRequired,
+
+  friendRequestsReceiveLoading: PropTypes.bool.isRequired,
+  friendRequestsSendLoading: PropTypes.bool.isRequired,
+  recommendFriendsLoading: PropTypes.bool.isRequired,
 };
+
+const friendRequestsReceiveLoading = createLoadingSelector([
+  FriendActionTypes.GET_FRIEND_RECEIVE.BASE,
+]);
+
+const friendRequestsSendLoading = createLoadingSelector([
+  FriendActionTypes.GET_REQUESTS_FRIENDS.BASE,
+]);
+
+const recommendFriendsLoading = createLoadingSelector([
+  FriendActionTypes.GET_RECOMMEND_FRIENDS.BASE,
+]);
 
 const mapStateToProps = state => ({
   friendRequestsReceive: state.friend.friendRequestsReceive,
+  friendRequestsReceiveLoading: friendRequestsReceiveLoading(state),
   friendRequestsSend: state.friend.friendRequestsSend,
+  friendRequestsSendLoading: friendRequestsSendLoading(state),
   recommendFriends: state.friend.recommendFriends,
+  recommendFriendsLoading: recommendFriendsLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
