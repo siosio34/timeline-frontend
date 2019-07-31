@@ -18,7 +18,6 @@ const initialState = {};
 const { store, persistor } = configureStore(initialState, history);
 
 function App() {
-  console.log(process.env);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

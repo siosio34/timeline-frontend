@@ -17,11 +17,6 @@
   color: #03cf5d;
 }
 
-.ant-btn-primary {
-  background-color: #03cf5d !important;
-  border-color: #03cf5d !important;
-}
-
 .fade-in {
   animation: fadein 2s;
   -moz-animation: fadein 2s; /* Firefox */

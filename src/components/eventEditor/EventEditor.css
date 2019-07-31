@@ -6,6 +6,21 @@
   line-height: initial;
 }
 
+.editor-button-area .ant-btn-primary {
+  background-color: #03cf5d;
+  border-color: #03cf5d;
+}
+
+.editor-button-area .ant-btn.editor-button.photo.ant-btn-primary.ant-btn-background-ghost,
+.editor-button-area .ant-btn.editor-button.photo.ant-btn-primary.ant-btn-background-ghost:hover,
+.editor-button-area .ant-btn.editor-button.photo.ant-btn-primary.ant-btn-background-ghost:focus{
+  border-color: #03cf5d;
+}
+
+.editor-button-are .ant-btn-primary.editor-button.photo {
+  background-color: white;
+}
+
 .event-editor .ant-btn-background-ghost.ant-btn-primary,
 .event-editor .ant-btn-background-ghost.ant-btn-primary:hover,
 .event-editor .ant-btn-background-ghost.ant-btn-primary:focus {
