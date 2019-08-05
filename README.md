@@ -1,6 +1,7 @@
 # timeline-frontend
 
 http://timeline.ryulth.com/
+테스트계정 : soyoung.dev@gmail.com / password123
 
 이 프로젝트는 2019 NAVER D2 FEST mini 썸머 챌린지에 출품하기 위한 프로젝트입니다. 여러 주제 중, 타임라인 주제를 선정하여 진행되었습니다.
 
