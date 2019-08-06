@@ -36,7 +36,20 @@ $ npm run build
 > 배포에 대한 추가적인 정보는 [여기](https://facebook.github.io/create-react-app/docs/deployment)를 확인해주세요.
 
 ## Feature
+
 이 프로젝트는 기본적인 기능을 담은 타임라인 서비스를 구현하였습니다.
+
+### 기술적 요소
+* axios interceptor(jwt 연동 및 코드 반복을 줄이기 위한 request, response interceptor를 구현)
+* infinite scroll + paging(스크롤의 끝을 인식후 redux-saga와 reselect를 사용하여 불러올 데이터 동적으로 로딩)
+* global loading, error(reducer마다 비동기상태(loading, error)를 추가를 안해도 자동으로 액션마다 비동기 상태를 받아올수 있음)
+* scalable and easy maintain folder architecture(fractal 구조 + absolute importing + 기능별로 분리된 폴더구조)
+* multiple file upload(antd file upload를 component를 커스텀해서 toast cloud image 서버와 연동)
+* the simplest handle form data(no make form state, no make handleChange, 그리고 yup을 이용한 form validate 체크)
+* don't make confirm modal every edit and delete action(confirm 사가를 이용해 메시지만 정의해도 알아서 모달생성)
+* save reducer when page refresh(redux-persist 연동을 통해 새로고침시 로그인상태유지)
+
+### 기능적 요소
 * 회원가입, 로그인/로그아웃
 * 새 소식(=이벤트) 작성, 삭제, 이미지 첨부
 * 타임라인, 내 소식 목록
